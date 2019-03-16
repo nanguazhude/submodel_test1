@@ -1,0 +1,4027 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/wwj_748/article/details/73991862"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+        <meta name="csdn-baidu-search"  content='{"autorun":true,"install":true,"keyword":"Git Submodule简单使用 - 巫山老妖"}'>
+    
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>Git Submodule简单使用 - 巫山老妖 - CSDN博客</title>
+
+        
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-d5bbc970f8.min.css">
+            
+            <script type="application/ld+json">{"@context":"https:\/\/ziyuan.baidu.com\/contexts\/cambrian.jsonld","@id":"https:\/\/blog.csdn.net\/wwj_748\/article\/details\/73991862","appid":"1563894916825412","title":"Git Submodule\u7b80\u5355\u4f7f\u7528 - \u5deb\u5c71\u8001\u5996","images":["https:\/\/img-blog.csdn.net\/20170630132942789?watermark\/2\/text\/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd3dqXzc0OA==\/font\/5a6L5L2T\/fontsize\/400\/fill\/I0JBQkFCMA==\/dissolve\/70\/gravity\/SouthEast","https:\/\/img-blog.csdn.net\/20170630133002460?watermark\/2\/text\/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd3dqXzc0OA==\/font\/5a6L5L2T\/fontsize\/400\/fill\/I0JBQkFCMA==\/dissolve\/70\/gravity\/SouthEast","https:\/\/img-blog.csdn.net\/20170630133026680?watermark\/2\/text\/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd3dqXzc0OA==\/font\/5a6L5L2T\/fontsize\/400\/fill\/I0JBQkFCMA==\/dissolve\/70\/gravity\/SouthEast"],"pubDate":"2019-03-16T21:53:34"}</script>
+        
+          <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin-blackboard/skin-blackboard-1340d63bd5.min.css">
+        <script type="text/javascript">
+        var username = "wwj_748";
+        var blog_address = "https://blog.csdn.net/wwj_748";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "";
+        var isShowAds = false;
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/wwj_748/article/details/73991862"
+        var blogUrl = "https://blog.csdn.net/";
+        //页面皮肤样式
+        var curSkin = "skin-blackboard";
+        // 第四范式所需数据
+        var articleTitles = "Git Submodule简单使用 - 巫山老妖";
+        var articleID = "73991862";
+        
+        var nickName = "IT_xiao小巫";
+        var isCorporate = false;
+        var subDomainBlogUrl = "https://blog.csdn.net/"
+        var digg_base_url = "https://blog.csdn.net/wwj_748/phoenix/comment";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+    <script src="//g.csdnimg.cn/fixed-sidebar/1.1.3/fixed-sidebar.js" type="text/javascript"></script>
+    <!-- 新版上报 -->
+    <script src="//g.csdnimg.cn/track/1.2.4/track.js" type="text/javascript"></script>
+    <!-- 新版上报end -->
+            <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<!-- nodata 第三栏接口无数据时样式不变 -->
+<body class="nodata " > 
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript">
+	// 容错处理
+	var NEWS_FEED = function(){}
+</script>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/copyright/1.0.3/copyright.js"></script>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/chart-3456820cac.css" />
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix" id="mainBox">
+			<div class="recommend-right">
+  <ul class="recommend-fixed-box">
+    
+  </ul>
+</div>	
+    <main>
+        <div class="blog-content-box">
+	<div class="article-header-box">
+		<div class="article-header">
+			<div class="article-title-box">
+				<span class="article-type type-1 float-left">原</span>				<h1 class="title-article">Git Submodule简单使用</h1>
+			</div>
+			<div class="article-info-box">
+				<div class="article-bar-top">
+																				<span class="time">2017年06月30日 13:32:30</span>
+					<a class="follow-nickName" href="https://me.csdn.net/wwj_748" target="_blank">IT_xiao小巫</a>
+						<span class="read-count">阅读数：10016</span>
+						
+																															</div>
+				<div class="operating">
+									</div>
+			</div>
+		</div>
+	</div>
+	<article class="baidu_pl">
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+								<div class="article-copyright">
+                  					<svg class="icon" title="CSDN认证原创" aria-hidden="true" style="width:53px; height: 18px; vertical-align: -4px;">
+							<use xlink:href="#CSDN_Cert"></use>
+					</svg>
+                  					
+					版权声明：本文为博主原创文章，未经博主允许不得转载。					https://blog.csdn.net/wwj_748/article/details/73991862				</div>
+								            <div id="content_views" class="markdown_views prism-atom-one-dark">
+							<!-- flowchart 箭头图标 勿删 -->
+							<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg>
+							<p><div class="toc"><div class="toc">
+<ul>
+<li><a href="#git-submodule" rel="nofollow">Git Submodule</a><ul>
+<li><a href="#添加submodule工程" rel="nofollow">添加submodule工程</a></li>
+<li><a href="#修改submodule" rel="nofollow">修改Submodule</a></li>
+<li><a href="#更新submodule" rel="nofollow">更新Submodule</a></li>
+<li><a href="#总结" rel="nofollow">总结</a></li>
+<li><a href="#更多参考" rel="nofollow">更多参考</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</p>
+
+
+
+<h1 id="git-submodule">Git Submodule</h1>
+
+<blockquote>
+  <p>近期用到了这个命令，主要是为了实现在一个git仓库中，引入其他git仓库，这种适用于你想在主工程中引入其他library库，主工程以<code>submodule</code>的形式包含子工程，子工程可以有自己的git操作，比如commit、push、rebase等。</p>
+</blockquote>
+
+<p>这里笔者用一个实际的例子来介绍这个命令的使用，不知道大家有没有在原生工程嵌入React Native？熟悉React Native工程的同学会知道有个一个android工程，如下图：</p>
+
+<p><img src="https://img-blog.csdn.net/20170630132942789?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd3dqXzc0OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="android submodule" title=""></p>
+
+<p>你会发现下面还会有一个iOS工程，我们客户端开发一般都会各自维护一个git仓库，为了让Android跟iOS不在同一个工程提交commit，主要是为了方便维护，所以就想着怎么在RN工程中引入Android工程和iOS工程，明白我们的需求之后，我们知道git中有<code>submodule</code>的操作，所以下面直接实操吧。</p>
+
+<h2 id="添加submodule工程">添加submodule工程</h2>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">git submodule <span class="hljs-keyword">add</span> http://git<span class="hljs-preprocessor">.code</span><span class="hljs-preprocessor">.oa</span><span class="hljs-preprocessor">.com</span>/TCW/Crowdsource-android<span class="hljs-preprocessor">.git</span> android</code></pre>
+
+<p>执行完这条命令之后，通过<code>git status</code>，可以看到变更信息：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs vhdl"><span class="hljs-keyword">On</span> branch master
+Your branch <span class="hljs-keyword">is</span> up-<span class="hljs-keyword">to</span>-date <span class="hljs-keyword">with</span> <span class="hljs-attribute">'origin</span>/master'.
+Changes <span class="hljs-keyword">to</span> be committed:
+  (<span class="hljs-keyword">use</span> <span class="hljs-string">"git reset HEAD &lt;file&gt;..."</span> <span class="hljs-keyword">to</span> unstage)
+
+    <span class="hljs-keyword">new</span> <span class="hljs-keyword">file</span>:   .gitmodules
+    <span class="hljs-keyword">new</span> <span class="hljs-keyword">file</span>:   android
+</code></pre>
+
+<p>然后添加子模块：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">git <span class="hljs-keyword">add</span> <span class="hljs-preprocessor">.getmodules</span> android
+git commit -m <span class="hljs-string">"add android submodule."</span>
+git submodule init</code></pre>
+
+<p>ok，到这里你成功添加了一个submodule.</p>
+
+
+
+<h2 id="修改submodule">修改Submodule</h2>
+
+<p>进入submodule.</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-built_in">cd</span> android</code></pre>
+
+<blockquote>
+  <p>我这里的submodule是<code>android</code>.</p>
+</blockquote>
+
+<p>这时我修改了android工程里面的内容，<code>git status</code>一下：</p>
+
+<p><img src="https://img-blog.csdn.net/20170630133002460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd3dqXzc0OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="modify submodule" title=""></p>
+
+<p>提交submodule的内容到远程：</p>
+
+<pre class="prettyprint"><code class=" hljs avrasm">git <span class="hljs-keyword">add</span> .
+git commit -m <span class="hljs-string">"嵌入React Native"</span>
+git <span class="hljs-keyword">push</span></code></pre>
+
+<p>提交后，看下Submodule在主工程中的变更：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-built_in">cd</span> ..
+git status</code></pre>
+
+<p>如下图：</p>
+
+<p><img src="https://img-blog.csdn.net/20170630133026680?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd3dqXzc0OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="modify submodule" title=""></p>
+
+<p>这时候，提交主工程的变更：</p>
+
+<pre class="prettyprint"><code class=" hljs avrasm">git <span class="hljs-keyword">add</span> .
+git commit -m <span class="hljs-string">"update android submodule"</span>
+git <span class="hljs-keyword">push</span></code></pre>
+
+<p>ok，这里已经成功修改了submodule.</p>
+
+
+
+<h2 id="更新submodule">更新Submodule</h2>
+
+<p>这里有个问题，你在自己机器完成了submodule的添加和修改，那其他同学想更新怎么办？</p>
+
+<p>在主工程根目录运行以下命令：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">git submodule <span class="hljs-keyword">foreach</span> git pull</code></pre>
+
+<p>还需要更新下submodule:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-built_in">cd</span> android
+git pull</code></pre>
+
+<p>ok，这样其他团队成员就能拉到最新的工程代码啦。</p>
+
+
+
+<h2 id="总结">总结</h2>
+
+<p>关于如何在RN工程中通过submodule方式引入android工程已经大致实操了一遍，还有clone submodule和remove submodule的操作就不演示了，可以参考下面提供的链接。</p>
+
+
+
+<h2 id="更多参考">更多参考</h2>
+
+<p><a href="http://www.jianshu.com/p/b49741cb1347" rel="nofollow">使用Git Submodule管理子模块</a></p>            </div>
+						<link href="https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-7b4cdcb592.css" rel="stylesheet">
+                </div>
+	</article>
+</div>
+  <div class="hide-article-box hide-article-pos text-center">
+    <div class="border"></div>
+        <a class="btn article-footer-btn" id="btn-readmore" data-track-view='{"mod":"popu_376","con":",https://blog.csdn.net/wwj_748/article/details/73991862,"}' data-track-click='{"mod":"popu_376","con":",https://blog.csdn.net/wwj_748/article/details/73991862,"}'>阅读更多</a>
+        <a class="btn article-footer-btn article-footer-bookmark-btn" >
+      <svg class="icon no-active hover-hide" aria-hidden="true">
+        <use xlink:href="#csdnc-bookmark"></use>
+      </svg>
+      <span>收藏</span>
+    </a>
+    <div class="btn article-footer-btn  bds_weixin article-footer-share-btn" data-cmd="weixin" title="分享">
+      <svg class="icon no-active hover-hide" aria-hidden="true">
+        <use xlink:href="#csdnc-share"></use>
+      </svg>
+      <span>分享</span>
+      <div class="bdsharebuttonbox">
+        <a href="#"class="bds_weixin clear-share-style-article-footer" data-cmd="weixin" title="分享"></a>
+      </div>
+    </div>
+    
+  </div>
+  <script>
+  (function(){
+    function collection(){
+      if (currentUserName) {
+        var markObj = {};
+            markObj.imgUrl ='https://csdnimg.cn/release/phoenix/static_blog/images/appqr.png';
+        var markPrompt = (new window.csdn.publicPrompt).init(markObj);
+        var maeked = '您已经收藏过';
+        if (!$(this).hasClass("liked")) {
+          $.ajax({
+            url: 'https://my.csdn.net/my/favorite/do_add/2',
+            dataType: 'json',
+            type: 'POST',
+            xhrFields: {
+              withCredentials: true
+            },
+            data: {
+              title: articleTit,
+              url: curentUrl,
+              share: 1,
+              map_name: ''
+            },
+            success: function(data) {
+              
+              if (data.succ == 1) {
+                $('.btn-bookmark').addClass("liked");
+                $('.article-footer-bookmark-btn').addClass("liked").children('span').text('已收藏');
+                markPrompt.show({})
+                // alert('收藏成功,可以在个人中心查看我的收藏');
+              } else {
+                if (data.msg === "您已经收藏过") {
+                  $('.btn-bookmark').addClass("liked");
+                  $('.article-footer-bookmark-btn').addClass("liked").children('span').text('已收藏');
+                  markPrompt.show({
+                    titleStr: maeked
+                  })
+                }else{
+                  alert(data.msg);
+                  
+                }
+              }
+            }
+          });
+        } else {
+          markPrompt.show({
+            titleStr: maeked
+          })
+        }
+      } else {
+        window.csdn.loginBox.show();
+      }
+    }
+    window.csdn = window.csdn ? window.csdn : {};
+    window.csdn.articleCollection = collection;
+    function setArticleH(btnReadmore,posi){
+      var winH = $(window).height();
+      var articleBox = $("div.article_content");
+      var artH = articleBox.height();
+      if(artH > winH*posi){
+        articleBox.css({
+          'height':winH*posi+'px',
+          'overflow':'hidden'
+        })
+        btnReadmore.click(function(){
+          articleBox.removeAttr("style");
+          $(this).parent().remove()
+        })
+      }else{
+        btnReadmore.parent().remove()
+      }
+    }
+    var btnReadmore = $("#btn-readmore");
+    $('.article-footer-bookmark-btn').click(window.csdn.articleCollection)
+    if(btnReadmore.length>0){
+      if(currentUserName){
+        setArticleH(btnReadmore,3);
+      }else{
+        setArticleH(btnReadmore,1.2);
+      }
+    }else{
+      $('.hide-article-box').addClass('hide-article-style');
+    }
+  })()
+</script>
+<script>
+		$(".MathJax").remove();
+		if($('div.markdown_views pre.prettyprint code.hljs').length > 0 ){
+				$('div.markdown_views')[0].className = 'markdown_views';
+		}
+</script>
+                <a id="commentBox"></a>
+<div class="comment-box">
+	
+	<div class="comment-edit-box d-flex">
+		<a id="commentsedit"></a>
+		<div class="user-img">
+			<a href="javascript:void(0);" target="_blank">
+				<img class="show_loginbox" src="//g.csdnimg.cn/static/user-img/anonymous-User-img.png">
+			</a>
+		</div>
+		<form id="commentform">
+			<input type="hidden" id="comment_replyId">
+			<textarea class="comment-content" name="comment_content" id="comment_content" placeholder="想对作者说点什么"></textarea>
+			<div class="opt-box"> <!-- d-flex -->
+				<div id="ubbtools" class="add_code">
+					<a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+				</div>
+				<input type="hidden" id="comment_replyId" name="comment_replyId">
+				<input type="hidden" id="article_id" name="article_id" value="73991862">
+				<input type="hidden" id="comment_userId" name="comment_userId" value="">
+				<input type="hidden" id="commentId" name="commentId" value="">
+				<div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+				<div class="dropdown" id="myDrap">
+					<a class="dropdown-face d-flex align-items-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<div class="txt-selected text-truncate">添加代码片</div>
+					<svg class="icon d-block" aria-hidden="true">
+						<use xlink:href="#csdnc-triangledown"></use>
+					</svg>
+					</a>
+					<ul class="dropdown-menu" id="commentCode" aria-labelledby="drop4">
+						<li><a data-code="html">HTML/XML</a></li>
+						<li><a data-code="objc">objective-c</a></li>
+						<li><a data-code="ruby">Ruby</a></li>
+						<li><a data-code="php">PHP</a></li>
+						<li><a data-code="csharp">C</a></li>
+						<li><a data-code="cpp">C++</a></li>
+						<li><a data-code="javascript">JavaScript</a></li>
+						<li><a data-code="python">Python</a></li>
+						<li><a data-code="java">Java</a></li>
+						<li><a data-code="css">CSS</a></li>
+						<li><a data-code="sql">SQL</a></li>
+						<li><a data-code="plain">其它</a></li>
+					</ul>
+				</div>  
+				<div class="right-box">
+					<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+					<input type="submit" class="btn btn-sm btn-red btn-comment" value="发表评论">
+				</div>
+			</div>
+		</form>
+	</div>
+
+		<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>
+        <div class="recommend-box">
+            		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/xuanwolanxue/article/details/80609986,BlogCommendFromBaidu_0"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/xuanwolanxue/article/details/80609986,BlogCommendFromBaidu_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xuanwolanxue/article/details/80609986" target="_blank" title="git submodule使用以及注意事项">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em>使用以及注意事项				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-07</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							8941</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xuanwolanxue/article/details/80609986" target="_blank" title="git submodule使用以及注意事项">
+							<span class="desc oneline">一、背景在平时的软件开发过程中常常会有这样的场景，自己负责的某个模块会依赖其他模块或者第三方的library。这时你自己的模块是一个独立的代码仓库，你想要实现这样一种功能，当你从你的模块的代码仓库里把...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xuanwolanxue">来自：	<span class="blog_title"> xuanwolanxue的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/guotianqing/article/details/82391665,BlogCommendFromBaidu_1"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/guotianqing/article/details/82391665,BlogCommendFromBaidu_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/guotianqing/article/details/82391665" target="_blank" title="git中submodule子模块的添加、使用和删除">
+				<h4 class="text-truncate oneline">
+						<em>git</em>中<em>submodule</em>子模块的添加、使用和删除				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4798</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/guotianqing/article/details/82391665" target="_blank" title="git中submodule子模块的添加、使用和删除">
+							<span class="desc oneline">背景项目中经常使用别人维护的模块，在git中使用子模块的功能能够大大提高开发效率。使用子模块后，不必负责子模块的维护，只需要在必要的时候同步更新子模块即可。本文主要讲解子模块相关的基础命令，详细使用请...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/guotianqing">来自：	<span class="blog_title"> guotianqing的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/huangqiang1363/article/details/83242242,BlogCommendFromBaidu_2"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/huangqiang1363/article/details/83242242,BlogCommendFromBaidu_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/huangqiang1363/article/details/83242242" target="_blank" title="git 操作常见问题集锦">
+				<h4 class="text-truncate oneline">
+						<em>git</em> 操作常见问题集锦				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							578</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/huangqiang1363/article/details/83242242" target="_blank" title="git 操作常见问题集锦">
+							<span class="desc oneline">1、刚刚gitclone下来的项目，需要gitsubmoduleupdate--init--recursive将依赖的子项目done下来，结果抛了个(fatal:Nourlfoundforsubmod...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/huangqiang1363">来自：	<span class="blog_title"> Small_White</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_41163331/article/details/81672836,BlogCommendFromBaidu_3"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_41163331/article/details/81672836,BlogCommendFromBaidu_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_41163331/article/details/81672836" target="_blank" title="git submodule 添加，更新与删除">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> 添加，更新与删除				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5680</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_41163331/article/details/81672836" target="_blank" title="git submodule 添加，更新与删除">
+							<span class="desc oneline">gitsubmodule是一个很好的多项目使用共同类库的工具，它允许类库项目作为repository，子项目做为一个单独的git项目存在父项目中，子项目可以有自己独立的commit、push、pull...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_41163331">来自：	<span class="blog_title"> qq_41163331的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/xiangzhihong8/article/details/80535495,BlogCommendFromBaidu_4"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/xiangzhihong8/article/details/80535495,BlogCommendFromBaidu_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xiangzhihong8/article/details/80535495" target="_blank" title="Git Submodule项目子模块管理">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> <em>Submodule</em>项目子模块管理				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-01</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2176</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xiangzhihong8/article/details/80535495" target="_blank" title="Git Submodule项目子模块管理">
+							<span class="desc oneline">模块化与组件化最近一直在研究客户端的组件化/模块化问题，除了将项目拆分为多个小的子模块，还会涉及到多个子模块管理的问题。下面说一些在模块化开发中的一些基本知识。一个完整的模块化大型项目，从低到高依次是...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xiangzhihong8">来自：	<span class="blog_title"> xiangzhihong8的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wangjia55/article/details/24400501,BlogCommendFromBaidu_5"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wangjia55/article/details/24400501,BlogCommendFromBaidu_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wangjia55/article/details/24400501" target="_blank" title="git submodule的使用">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em>的使用				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-24</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							11万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wangjia55/article/details/24400501" target="_blank" title="git submodule的使用">
+							<span class="desc oneline">转自：开发过程中，经常会有一些通用的部分希望抽取出来做成一个公共库来提供给别的工程来使用，而公共代码库的版本管理是个麻烦的事情。今天无意中发现了git的gitsubmodule命令，之前的问题迎刃而解...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wangjia55">来自：	<span class="blog_title"> wangjia55的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/liusf1993/article/details/72765131,BlogCommendFromBaidu_6"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/liusf1993/article/details/72765131,BlogCommendFromBaidu_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/liusf1993/article/details/72765131" target="_blank" title="git子模块使用之git submodule与 git subtree比较">
+				<h4 class="text-truncate oneline">
+						<em>git</em>子模块使用之<em>git</em> <em>submodule</em>与 <em>git</em> subtree比较				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5698</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/liusf1993/article/details/72765131" target="_blank" title="git子模块使用之git submodule与 git subtree比较">
+							<span class="desc oneline">简述在开发中，稍微复杂一点的项目都会有多个功能模块，大致结构可能是这样project　|–moduleA　　|–submoduleC　　|–submoduleD　|–moduleB同时，模块A可能被p...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/liusf1993">来自：	<span class="blog_title"> liusf1993的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/czhpxl007/article/details/50555853,BlogCommendFromBaidu_7"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/czhpxl007/article/details/50555853,BlogCommendFromBaidu_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/czhpxl007/article/details/50555853" target="_blank" title="git submodule 使用命令简介">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> 使用命令简介				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							9173</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/czhpxl007/article/details/50555853" target="_blank" title="git submodule 使用命令简介">
+							<span class="desc oneline">抽取项目公共模块，多用项目公用，必然会使用到gitsubmodule命名。submodule的管理，无外乎添加，更新，删除等操作。submodule添加进入到git项目根目录下，输入命令:gitsub...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/czhpxl007">来自：	<span class="blog_title"> 一座小楼的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/xingqingly/article/details/80698246,BlogCommendFromBaidu_8"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/xingqingly/article/details/80698246,BlogCommendFromBaidu_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xingqingly/article/details/80698246" target="_blank" title="git submodule 使用小结">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> 使用小结				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1222</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xingqingly/article/details/80698246" target="_blank" title="git submodule 使用小结">
+							<span class="desc oneline">原文链接http://blog.gezhiqiang.com/2017/03/08/git-submodule/######GitSubmodule允许一个git仓库，作为另一个git仓库的子目录，并...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xingqingly">来自：	<span class="blog_title"> xingqingly的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/ragty/article/details/79081773,BlogCommendESEnWordWeight_9"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/ragty/article/details/79081773,BlogCommendESEnWordWeight_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ragty/article/details/79081773" target="_blank" title="GIT带着子模块拉取代码">
+				<h4 class="text-truncate oneline">
+						<em>GIT</em>带着子模块拉取代码				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-17</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1928</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ragty/article/details/79081773" target="_blank" title="GIT带着子模块拉取代码">
+							<span class="desc oneline">根据supper的父项目配置获取对应子项目。父模块仅进行拉取操作，拉取完毕后，进入子模块进行构建操作使用命令：#父级+子集一起clonegit clone --recursive git地址 #协助父...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ragty">来自：	<span class="blog_title"> 名叫小高同学的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+          <div class="recommend-item-box blog-expert-recommend-box">
+				<div class="d-flex">
+					<div class="blog-expert-recommend">
+						<div class="blog-expert">
+							<div class="blog-expert-flexbox"></div>
+						</div>
+					</div>
+				</div>
+      </div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/10km/article/details/80308199,BlogCommendESEnWordWeight_10"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/10km/article/details/80308199,BlogCommendESEnWordWeight_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/10km/article/details/80308199" target="_blank" title="git submodule update报错: error: Server does not allow request for unadvertised object">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> update报错: error: Server does not allow request for unadvertised object				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2594</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/10km/article/details/80308199" target="_blank" title="git submodule update报错: error: Server does not allow request for unadvertised object">
+							<span class="desc oneline">周末在家里做了一些工作，周一到办公室，执行git更新办公室电脑上的代码时，报错了gitsubmoduleupdate–initfaceapi-rpc-cpp/dependencies/common_s...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/10km">来自：	<span class="blog_title"> 10km的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/chang_li/article/details/79568509,BlogCommendFromBaidu_11"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/chang_li/article/details/79568509,BlogCommendFromBaidu_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/chang_li/article/details/79568509" target="_blank" title="git 添加更新子模块">
+				<h4 class="text-truncate oneline">
+						<em>git</em> 添加更新子模块				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-15</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2788</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/chang_li/article/details/79568509" target="_blank" title="git 添加更新子模块">
+							<span class="desc oneline">添加submodule到仓库下载父仓库:gitclonegit@gitlab.abc.com:cloud-security-platform/console-after.git父仓库中添加submod...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/chang_li">来自：	<span class="blog_title"> 越自律越自由</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013531824/article/details/53496011,BlogCommendFromBaidu_12"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013531824/article/details/53496011,BlogCommendFromBaidu_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013531824/article/details/53496011" target="_blank" title="【React Native】在原生项目中集成之坑点总结">
+				<h4 class="text-truncate oneline">
+						【React Native】在原生项目中集成之坑点总结				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-07</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							9599</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013531824/article/details/53496011" target="_blank" title="【React Native】在原生项目中集成之坑点总结">
+							<span class="desc oneline">IntegrationWithExistapps在原生项目中，集成ReactNative框架，部分功能是用RN进行开发。包括依赖引入，包重复等问题进行总结，希望能帮到大家。...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u013531824">来自：	<span class="blog_title"> Tiny的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u012291393/article/details/78568765,BlogCommendFromBaidu_13"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u012291393/article/details/78568765,BlogCommendFromBaidu_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u012291393/article/details/78568765" target="_blank" title="Git submodule 命令简介">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> <em>submodule</em> 命令简介				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-20</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							272</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u012291393/article/details/78568765" target="_blank" title="Git submodule 命令简介">
+							<span class="desc oneline">摘要:gitsubmodule就是git主仓库在本仓库的配置中记录着子模块仓库对应的名字，路径，远端url，然后创建一个特殊文件去记录子模块仓库目前的commit-id，每次更新子模块就是通过远端路径...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u012291393">来自：	<span class="blog_title"> 被欺负的大白</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/GVFDBDF/article/details/52152534,BlogCommendFromBaidu_14"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/GVFDBDF/article/details/52152534,BlogCommendFromBaidu_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/GVFDBDF/article/details/52152534" target="_blank" title="git子模块更新的两个错误解决">
+				<h4 class="text-truncate oneline">
+						<em>git</em>子模块更新的两个错误解决				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-08</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4028</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/GVFDBDF/article/details/52152534" target="_blank" title="git子模块更新的两个错误解决">
+							<span class="desc oneline">最近在clonefaster-RCNN工程时，出现了两个问题，记录一下解决方法。1.问题描述因为网络原因，我在Linux上clone这个仓库时，总是连接失败，导致我不得不在另一台电脑上clone。然后...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/GVFDBDF">来自：	<span class="blog_title"> GVFDBDF的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/nnmmbb/article/details/46713095,BlogCommendFromBaidu_15"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/nnmmbb/article/details/46713095,BlogCommendFromBaidu_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/nnmmbb/article/details/46713095" target="_blank" title="gitlab使用深度总结">
+				<h4 class="text-truncate oneline">
+						<em>git</em>lab使用深度总结				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-01</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/nnmmbb/article/details/46713095" target="_blank" title="gitlab使用深度总结">
+							<span class="desc oneline">已经开始使用Git了，有些时候一般的问题只能Google就能找到答案，但是有些时候不能找到答案，因为遇到的问题都不知道该用什么关键字搜索。很多是在Git中文的QQ群中讨论出来的，把一些经验总结一下：1...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/nnmmbb">来自：	<span class="blog_title"> 周刚的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/a13271785989/article/details/42777793,BlogCommendFromGuangxin_16"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/a13271785989/article/details/42777793,BlogCommendFromGuangxin_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/a13271785989/article/details/42777793" target="_blank" title="使用Git Submodule可能遇到的坑">
+				<h4 class="text-truncate oneline">
+						使用<em>Git</em> <em>Submodule</em>可能遇到的坑				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2104</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/a13271785989/article/details/42777793" target="_blank" title="使用Git Submodule可能遇到的坑">
+							<span class="desc oneline">2013-05-1310:03cocoachinacocoachina 字号：T | T随着近几年的发展，Git已经成为开源界的标准的版本控制工具。开源界的重量级项目，如Linux,Android,E...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/a13271785989">来自：	<span class="blog_title"> a13271785989的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/bailyzheng/article/details/50825215,BlogCommendFromGuangxin_17"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/bailyzheng/article/details/50825215,BlogCommendFromGuangxin_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/bailyzheng/article/details/50825215" target="_blank" title="git submodule 删除及更新URL">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> 删除及更新URL				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-08</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							9472</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/bailyzheng/article/details/50825215" target="_blank" title="git submodule 删除及更新URL">
+							<span class="desc oneline">删除一个submodule1.删除.gitsubmodule中对应submodule的条目2.删除.git/config中对应submodule的条目3.执行gitrm--cached{submodu...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/bailyzheng">来自：	<span class="blog_title"> 海纳百川</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u012973744/article/details/18812181,BlogCommendFromGuangxin_18"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u012973744/article/details/18812181,BlogCommendFromGuangxin_18"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u012973744/article/details/18812181" target="_blank" title="git强制更新所有submodule">
+				<h4 class="text-truncate oneline">
+						<em>git</em>强制更新所有<em>submodule</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-27</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1861</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u012973744/article/details/18812181" target="_blank" title="git强制更新所有submodule">
+							<span class="desc oneline">gitsubmoduleforeach'gitcheckout-f'</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u012973744">来自：	<span class="blog_title"> u012973744的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zcxwww/article/details/61956326,BlogCommendFromQuerySearch_19"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zcxwww/article/details/61956326,BlogCommendFromQuerySearch_19"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zcxwww/article/details/61956326" target="_blank" title="利用git submodule实现组件化模块分库">
+				<h4 class="text-truncate oneline">
+						利用<em>git</em> <em>submodule</em>实现组件化模块分库				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							915</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zcxwww/article/details/61956326" target="_blank" title="利用git submodule实现组件化模块分库">
+							<span class="desc oneline">在開發的過程中我們的項目可能會引用其他的版本庫中的代碼,例如公司已經累積了一套公用的函式庫,被多個項目調用; 很顯然地,不能把公用函式庫的文件直接放到我們開發中的項目中,這樣不但項目的冗餘,也增加維護...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zcxwww">来自：	<span class="blog_title"> 南朝烟雨的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/denghepingpeace/article/details/50997785,BlogCommendFromQuerySearch_20"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/denghepingpeace/article/details/50997785,BlogCommendFromQuerySearch_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/denghepingpeace/article/details/50997785" target="_blank" title="git submodule的使用，主项目和公共库关联起来">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em>的使用，主项目和公共库关联起来				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-28</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							781</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/denghepingpeace/article/details/50997785" target="_blank" title="git submodule的使用，主项目和公共库关联起来">
+							<span class="desc oneline">开发过程中，经常会有一些通用的部分希望抽取出来做成一个公共库来提供给别的工程来使用，而公共代码库的版本管理是个麻烦的事情。今天无意中发现了git的gitsubmodule命令，之前的问题迎刃而解了。添...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/denghepingpeace">来自：	<span class="blog_title"> denghepingpeace的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wag2765/article/details/84773801,BlogCommendFromQuerySearch_21"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wag2765/article/details/84773801,BlogCommendFromQuerySearch_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wag2765/article/details/84773801" target="_blank" title="git submodule用法（引用外部仓库）">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em>用法（引用外部仓库）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-30</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							51</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wag2765/article/details/84773801" target="_blank" title="git submodule用法（引用外部仓库）">
+							<span class="desc oneline">原文作者：@玄冬Wong 如果一个仓库中，引用了几个其他几个仓库，想在更新本次仓库的时候同时更新将其他几个引用仓库，那么可以使用git submodule。要使用submodule，初始化时貌似只能通...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wag2765">来自：	<span class="blog_title"> 玄冬Wong</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/Smallsun_229/article/details/80721928,BlogCommendFromQuerySearch_22"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/Smallsun_229/article/details/80721928,BlogCommendFromQuerySearch_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Smallsun_229/article/details/80721928" target="_blank" title="如何处理公共模块--对比npm和git submodule">
+				<h4 class="text-truncate oneline">
+						如何处理公共模块--对比npm和<em>git</em> <em>submodule</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-17</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							335</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Smallsun_229/article/details/80721928" target="_blank" title="如何处理公共模块--对比npm和git submodule">
+							<span class="desc oneline">先说一下使用场景：当多个项目中用到了公共模块，如何处理这些公共模块呢？举个例子：当前项目中用到了一些组件Loading、Input啊，一些公共组件，并不想写在项目本身，而是抽出来可以为多个项目所复用。...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Smallsun_229">来自：	<span class="blog_title"> smallsun</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u011361138/article/details/83451552,BlogCommendFromQuerySearch_23"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u011361138/article/details/83451552,BlogCommendFromQuerySearch_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011361138/article/details/83451552" target="_blank" title="Git submodule 的入门操作">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> <em>submodule</em> 的入门操作				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-28</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							80</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011361138/article/details/83451552" target="_blank" title="Git submodule 的入门操作">
+							<span class="desc oneline">1)简单介绍有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。也许是第三方库，或者你独立开发的，用于多个父项目的库。现在问题来了：你想要把它们当做两个独立的项目，同时又想在一个项目中使...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u011361138">来自：	<span class="blog_title"> 范翻番樊的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/iamoyjj/article/details/71403634,BlogCommendFromBaidu_24"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/iamoyjj/article/details/71403634,BlogCommendFromBaidu_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/iamoyjj/article/details/71403634" target="_blank" title="Git 工具 - 子模块  submodule">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> 工具 - 子模块  <em>submodule</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-08</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6758</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/iamoyjj/article/details/71403634" target="_blank" title="Git 工具 - 子模块  submodule">
+							<span class="desc oneline">7.11Git工具-子模块子模块有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。也许是第三方库，或者你独立开发的，用于多个父项目的库。现在问题来了：你想要把它们当做两个独立的项目，同...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/iamoyjj">来自：	<span class="blog_title"> OYJJ的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u011262847/article/details/76651989,BlogCommendFromBaidu_25"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u011262847/article/details/76651989,BlogCommendFromBaidu_25"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011262847/article/details/76651989" target="_blank" title="git-子模块submodule">
+				<h4 class="text-truncate oneline">
+						<em>git</em>-子模块<em>submodule</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-03</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6703</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011262847/article/details/76651989" target="_blank" title="git-子模块submodule">
+							<span class="desc oneline">git裸库没有工作区的git仓库,例如远程服务器存放项目代码的仓库，并不需要工作区来修改gitsubmodule一个git项目需要引入另外一个git项目的时候，可以使用submodule命令来完成。g...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u011262847">来自：	<span class="blog_title"> huiGod的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/oMingZi12345678/article/details/53093159,BlogCommendFromBaidu_26"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/oMingZi12345678/article/details/53093159,BlogCommendFromBaidu_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/oMingZi12345678/article/details/53093159" target="_blank" title="Git Submodule 使用简介">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> <em>Submodule</em> 使用简介				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-09</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5938</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/oMingZi12345678/article/details/53093159" target="_blank" title="Git Submodule 使用简介">
+							<span class="desc oneline">时间 2016-03-0523:22:27  &quot;地瓜哥&quot;博客网原文  http://www.diguage.com/archives/146.html主题 GitD瓜哥从去年开始，将所有的笔记都整合到...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/oMingZi12345678">来自：	<span class="blog_title"> Mingz技术博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/icbm/article/details/54790862,BlogCommendFromBaidu_27"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/icbm/article/details/54790862,BlogCommendFromBaidu_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/icbm/article/details/54790862" target="_blank" title="Git Submodule 命令">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> <em>Submodule</em> 命令				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-30</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1088</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/icbm/article/details/54790862" target="_blank" title="Git Submodule 命令">
+							<span class="desc oneline">submodule就是在你的git里面记录一下你引用到的其他模块的信息。over。。。。啥，这就over了。对，木有错。就那么简单。本质上和你手动copy一个reposit过来到你的工程目录，再拿个小...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/icbm">来自：	<span class="blog_title"> icbm的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u010026245/article/details/50859703,BlogCommendFromBaidu_28"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u010026245/article/details/50859703,BlogCommendFromBaidu_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010026245/article/details/50859703" target="_blank" title="初识Submodule">
+				<h4 class="text-truncate oneline">
+						初识<em>Submodule</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							689</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010026245/article/details/50859703" target="_blank" title="初识Submodule">
+							<span class="desc oneline">初识Submodule通常，大型的工程总会被拆分成一些自工程，这样既有利于开发过程中开发难度的降低，也有利于使用现有的方案或者模块作为自工程。Git的高级功能Submodule就是完成这样一种自工程拆...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u010026245">来自：	<span class="blog_title"> dubai</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zahuopuboss/article/details/51472842,BlogCommendFromBaidu_29"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zahuopuboss/article/details/51472842,BlogCommendFromBaidu_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zahuopuboss/article/details/51472842" target="_blank" title="git的submodule功能详解">
+				<h4 class="text-truncate oneline">
+						<em>git</em>的<em>submodule</em>功能详解				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2332</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zahuopuboss/article/details/51472842" target="_blank" title="git的submodule功能详解">
+							<span class="desc oneline">目录[-]1. 前言2. 准备工作3. TortoiseGit上git submodule功能实现1. 添加子模组的步骤第一步：使用submodule add...添加子模组第二步：查看.gitmod...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zahuopuboss">来自：	<span class="blog_title"> 雜貨鋪</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_27650777/article/details/64130094,BlogCommendFromBaidu_30"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_27650777/article/details/64130094,BlogCommendFromBaidu_30"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_27650777/article/details/64130094" target="_blank" title="Android业务组件化之子模块SubModule的拆分以及它们之间的路由Router实现">
+				<h4 class="text-truncate oneline">
+						Android业务组件化之子模块<em>SubModule</em>的拆分以及它们之间的路由Router实现				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-20</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							675</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_27650777/article/details/64130094" target="_blank" title="Android业务组件化之子模块SubModule的拆分以及它们之间的路由Router实现">
+							<span class="desc oneline">转自：Android业务组件化之子模块SubModule的拆分以及它们之间的路由Router实现前言：   前面分析了APP的现状以及业务组件化的一些探讨（Android业务组件化之现状分析与探讨），...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_27650777">来自：	<span class="blog_title"> 菜鸟的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/birthmarkqiqi/article/details/45079035,BlogCommendFromBaidu_31"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/birthmarkqiqi/article/details/45079035,BlogCommendFromBaidu_31"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/birthmarkqiqi/article/details/45079035" target="_blank" title="Git的submodule功能详解">
+				<h4 class="text-truncate oneline">
+						<em>Git</em>的<em>submodule</em>功能详解				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1007</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/birthmarkqiqi/article/details/45079035" target="_blank" title="Git的submodule功能详解">
+							<span class="desc oneline">阅读目录第一步：使用submodule add...添加子模组第二步：查看.gitmodules的内容第一步：克隆super主版本库第二步：克隆子模组1) 对主Git库工作区作commit操作2) 对...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/birthmarkqiqi">来自：	<span class="blog_title"> birthmarkqiqi的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/skykingf/article/details/44338807,BlogCommendFromBaidu_32"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/skykingf/article/details/44338807,BlogCommendFromBaidu_32"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/skykingf/article/details/44338807" target="_blank" title="Git下载子模块">
+				<h4 class="text-truncate oneline">
+						<em>Git</em>下载子模块				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-17</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2889</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/skykingf/article/details/44338807" target="_blank" title="Git下载子模块">
+							<span class="desc oneline">Git下载子模块的命令如下gitsubmoduleupdate--init--recursive</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/skykingf">来自：	<span class="blog_title"> skykingf的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/xiaolei05/article/details/43603687,BlogCommendFromBaidu_33"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/xiaolei05/article/details/43603687,BlogCommendFromBaidu_33"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xiaolei05/article/details/43603687" target="_blank" title="git submodule update failed">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> update failed				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-07</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4353</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xiaolei05/article/details/43603687" target="_blank" title="git submodule update failed">
+							<span class="desc oneline">orpath'third_party/waitress'Submodule'NRefactory'(https://github.com/nosami/OmniSharpServer)register...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xiaolei05">来自：	<span class="blog_title"> wince--linux的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wodenhaowzg/article/details/82463613,BlogCommendFromQuerySearch_34"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wodenhaowzg/article/details/82463613,BlogCommendFromQuerySearch_34"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wodenhaowzg/article/details/82463613" target="_blank" title="Git--项目模块化管理submodule命令">
+				<h4 class="text-truncate oneline">
+						<em>Git</em>--项目模块化管理<em>submodule</em>命令				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							178</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wodenhaowzg/article/details/82463613" target="_blank" title="Git--项目模块化管理submodule命令">
+							<span class="desc oneline">公司一直在用SVN管理代码，使用起来也很方便，但现在突然改用Git，一时间有点不适应。最大的一点就是Git不像SVN那样，可以在项目中的任意文件夹下单独更新文件夹内的代码，而Git则不行。每次在某个子...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wodenhaowzg">来自：	<span class="blog_title"> 愛橙絮</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zengfenliang/article/details/82767667,BlogCommendFromQuerySearch_35"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zengfenliang/article/details/82767667,BlogCommendFromQuerySearch_35"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zengfenliang/article/details/82767667" target="_blank" title="git对submodule多模块的tag操作">
+				<h4 class="text-truncate oneline">
+						<em>git</em>对<em>submodule</em>多模块的tag操作				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-19</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							163</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zengfenliang/article/details/82767667" target="_blank" title="git对submodule多模块的tag操作">
+							<span class="desc oneline">git对多模块的操作需要使用下面的命令gitsubmoduleforeach只需要在后面加上需要进行的操作，就会逐模块执行。比如：gitsubmoduleforeachgitstash就会遍历所有子模...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zengfenliang">来自：	<span class="blog_title"> Kslient的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wkyseo/article/details/81589477,BlogCommendFromQuerySearch_36"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wkyseo/article/details/81589477,BlogCommendFromQuerySearch_36"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wkyseo/article/details/81589477" target="_blank" title="git submodule 完整用法整理">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> 完整用法整理				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							386</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wkyseo/article/details/81589477" target="_blank" title="git submodule 完整用法整理">
+							<span class="desc oneline">最近有个项目遇到有子模块，遂整理下。。牛逼的人感觉看官网就行，像我这种菜鸟总是需要反复记忆，git官网链接戳此。1.先来个官方的APIgitsubmodule[--quiet]add[&amp;amp;amp...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wkyseo">来自：	<span class="blog_title"> 吴孔云的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zhyshamily/article/details/84701467,BlogCommendFromQuerySearch_37"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zhyshamily/article/details/84701467,BlogCommendFromQuerySearch_37"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhyshamily/article/details/84701467" target="_blank" title="删除git submodule最为精准的一片描述文章">
+				<h4 class="text-truncate oneline">
+						删除<em>git</em> <em>submodule</em>最为精准的一片描述文章				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							16</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhyshamily/article/details/84701467" target="_blank" title="删除git submodule最为精准的一片描述文章">
+							<span class="desc oneline">转自 http://davidwalsh.name/git-remove-submodule Formanygit-basedprojects,submodulesareusefulinavoidin...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zhyshamily">来自：	<span class="blog_title"> 桔子</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/Callon_H/article/details/51308841,BlogCommendFromQuerySearch_38"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/Callon_H/article/details/51308841,BlogCommendFromQuerySearch_38"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Callon_H/article/details/51308841" target="_blank" title="Git使用总结（遇到问题，持续更新）">
+				<h4 class="text-truncate oneline">
+						<em>Git</em>使用总结（遇到问题，持续更新）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2697</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Callon_H/article/details/51308841" target="_blank" title="Git使用总结（遇到问题，持续更新）">
+							<span class="desc oneline">Git使用总结，初学者最适合看看入门～</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Callon_H">来自：	<span class="blog_title"> Callon_H的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/n5/article/details/8808465,BlogCommendFromBaidu_39"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/n5/article/details/8808465,BlogCommendFromBaidu_39"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/n5/article/details/8808465" target="_blank" title="git学习 - 使用submodule（子模块）管理外链库">
+				<h4 class="text-truncate oneline">
+						<em>git</em>学习 - 使用<em>submodule</em>（子模块）管理外链库				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/n5/article/details/8808465" target="_blank" title="git学习 - 使用submodule（子模块）管理外链库">
+							<span class="desc oneline">git学习-使用submodule（子模块）管理外链库submodule是固定commit的clone,默认为head执行gitsubmoduleadd或对于新clone下来宿主项目执行gitsubm...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/n5">来自：	<span class="blog_title"> 技术无界</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/bailyzheng/article/details/33405103,BlogCommendFromBaidu_40"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/bailyzheng/article/details/33405103,BlogCommendFromBaidu_40"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/bailyzheng/article/details/33405103" target="_blank" title="Git Submodule完整教程(3/3)">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> <em>Submodule</em>完整教程(3/3)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-22</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2561</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/bailyzheng/article/details/33405103" target="_blank" title="Git Submodule完整教程(3/3)">
+							<span class="desc oneline">2.8.1牛刀小试?1234➜henryyan@hy-hp ~/submd/ws/project1-bgit:(master)✗greppath.gitmodules|awk'{print$3}'&gt;/...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/bailyzheng">来自：	<span class="blog_title"> 海纳百川</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/skylin19840101/article/details/55048389,BlogCommendFromBaidu_41"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/skylin19840101/article/details/55048389,BlogCommendFromBaidu_41"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/skylin19840101/article/details/55048389" target="_blank" title="使用Submodule管理iOS第三方资源">
+				<h4 class="text-truncate oneline">
+						使用<em>Submodule</em>管理iOS第三方资源				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-13</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							968</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/skylin19840101/article/details/55048389" target="_blank" title="使用Submodule管理iOS第三方资源">
+							<span class="desc oneline">使用Submodule管理iOS第三方控件</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/skylin19840101">来自：	<span class="blog_title"> 骑着蜗牛找马儿</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/yanming19/article/details/19068159,BlogCommendFromBaidu_42"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/yanming19/article/details/19068159,BlogCommendFromBaidu_42"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yanming19/article/details/19068159" target="_blank" title="git submodule init and filemode">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em> init and filemode				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1593</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yanming19/article/details/19068159" target="_blank" title="git submodule init and filemode">
+							<span class="desc oneline">https://www.kernel.org/pub/software/scm/git/docs/git-submodule.htmlgitsubmoduleinit1.只更新mainreposito...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yanming19">来自：	<span class="blog_title"> yanming的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/Yan_Chou/article/details/73730793,BlogCommendFromBaidu_43"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/Yan_Chou/article/details/73730793,BlogCommendFromBaidu_43"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Yan_Chou/article/details/73730793" target="_blank" title="git submodule以及被忽略的.gitignore">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em>以及被忽略的.<em>git</em>ignore				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2043</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Yan_Chou/article/details/73730793" target="_blank" title="git submodule以及被忽略的.gitignore">
+							<span class="desc oneline">引言：　不积跬步，无以至千里；不积小流，无以成江海。原本自以为对git相关的东西以及原理已经有了不错的认识和理解，然而当碰到一个小小的problem才发现自己掌握得并没有自己想象的那么好，好记性不如烂...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Yan_Chou">来自：	<span class="blog_title"> Anteoy的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_37871174/article/details/79196213,BlogCommendFromBaidu_44"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_37871174/article/details/79196213,BlogCommendFromBaidu_44"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_37871174/article/details/79196213" target="_blank" title="git增加删除submodule">
+				<h4 class="text-truncate oneline">
+						<em>git</em>增加删除<em>submodule</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							91</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_37871174/article/details/79196213" target="_blank" title="git增加删除submodule">
+							<span class="desc oneline">一、删除submodule1、rm-rf.gitmodules2、gitrm--cachedsubmodule(第三方代码目录名字)3、rm-rfxxx(第三方代码目录)4、如果这样操作了还是不能ad...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/weixin_37871174">来自：	<span class="blog_title"> weixin_37871174的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/HMSIWTV/article/details/7909898,BlogCommendFromBaidu_45"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/HMSIWTV/article/details/7909898,BlogCommendFromBaidu_45"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/HMSIWTV/article/details/7909898" target="_blank" title="Git 常用命令详解（二）">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> 常用命令详解（二）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4291</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/HMSIWTV/article/details/7909898" target="_blank" title="Git 常用命令详解（二）">
+							<span class="desc oneline">Git是一个很强大的分布式版本管理工具，它不但适用于管理大型开源软件的源代码（如：linuxkernel），管理私人的文档和源代码也有很多优势（如：wsi-lgame-pro）Git的更多介绍，请参考...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/HMSIWTV">来自：	<span class="blog_title"> Tyrion Lannister's Special column</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/stevefang/article/details/44223239,BlogCommendFromBaidu_46"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/stevefang/article/details/44223239,BlogCommendFromBaidu_46"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/stevefang/article/details/44223239" target="_blank" title="Git--Submodule的用法">
+				<h4 class="text-truncate oneline">
+						<em>Git</em>--<em>Submodule</em>的用法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-12</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3182</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/stevefang/article/details/44223239" target="_blank" title="Git--Submodule的用法">
+							<span class="desc oneline">Git--Submodule，更好的管理代码，文艺程序员的标配</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/stevefang">来自：	<span class="blog_title"> stevefang的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/hzaini89/article/details/83541853,BlogCommendFromQuerySearch_47"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/hzaini89/article/details/83541853,BlogCommendFromQuerySearch_47"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hzaini89/article/details/83541853" target="_blank" title="Git Submodule 项目中的使用">
+				<h4 class="text-truncate oneline">
+						<em>Git</em> <em>Submodule</em> 项目中的使用				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-30</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							54</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hzaini89/article/details/83541853" target="_blank" title="Git Submodule 项目中的使用">
+							<span class="desc oneline">前言：有时候我们在开发项目中需要抽离出公共组件库（或者第三方），与业务隔离，可供多个项目或者团队使用；接下来我们来看具体的实施步骤：如下图：如上图，我们项目里套用里gitTest1项目git仓库地址，...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hzaini89">来自：	<span class="blog_title"> 京都玩家</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/jasonwang178/article/details/83907781,BlogCommendFromQuerySearch_48"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/jasonwang178/article/details/83907781,BlogCommendFromQuerySearch_48"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jasonwang178/article/details/83907781" target="_blank" title="git submodule，解决依赖模块更新">
+				<h4 class="text-truncate oneline">
+						<em>git</em> <em>submodule</em>，解决依赖模块更新				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-20</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							40</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jasonwang178/article/details/83907781" target="_blank" title="git submodule，解决依赖模块更新">
+							<span class="desc oneline">gitsubmoduleadd添加项目的依赖模块在项目的根目录添加子模块$cddemo_project$gitsubmoduleaddgit://github.com/felixge/node-mys...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/jasonwang178">来自：	<span class="blog_title"> 冨彗雙脩 垂裕後崑</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/silent56_th/article/details/83899442,BlogCommendFromQuerySearch_49"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/silent56_th/article/details/83899442,BlogCommendFromQuerySearch_49"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/silent56_th/article/details/83899442" target="_blank" title="git递归移动submodule">
+				<h4 class="text-truncate oneline">
+						<em>git</em>递归移动<em>submodule</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-09</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							31</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/silent56_th/article/details/83899442" target="_blank" title="git递归移动submodule">
+							<span class="desc oneline">总结自：HowdoImoveanexistingGitsubmodulewithinaGitrepository?，Git:movingsubmodulesrecursively(nestedsubm...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/silent56_th">来自：	<span class="blog_title"> silent56_th的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/sinolzeng/article/details/24608551,BlogCommendHotData_0"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/sinolzeng/article/details/24608551,BlogCommendHotData_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sinolzeng/article/details/24608551" target="_blank" title="Unity学习笔记2 简易2D横版RPG游戏制作（二）">
+				<h4 class="text-truncate oneline">
+						Unity学习笔记2 简易2D横版RPG游戏制作（二）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-01</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6755</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sinolzeng/article/details/24608551" target="_blank" title="Unity学习笔记2 简易2D横版RPG游戏制作（二）">
+							<span class="desc oneline">简易2D横版RPG游戏制作（二）
+现在我们到了di</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/sinolzeng">来自：	<span class="blog_title"> sinolzeng的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/evilswords/article/details/5698851,BlogCommendHotData_1"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/evilswords/article/details/5698851,BlogCommendHotData_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/evilswords/article/details/5698851" target="_blank" title="应用程序正常初始化 0x0150002失败">
+				<h4 class="text-truncate oneline">
+						应用程序正常初始化 0x0150002失败				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-28</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/evilswords/article/details/5698851" target="_blank" title="应用程序正常初始化 0x0150002失败">
+							<span class="desc oneline">　用VC2005编译的程序，编译时没有任何错误，但是运行时就是提示“应用程序正常初始化失败”！！ 查找了各方面资料，做了各种尝试，网上说什么的都有：有让安装vc2005 sp1补丁的；有让安装vcre...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/evilswords">来自：	<span class="blog_title"> DDR的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u010258235/article/details/45666851,BlogCommendHotData_2"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u010258235/article/details/45666851,BlogCommendHotData_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010258235/article/details/45666851" target="_blank" title="C语言函数操作大全----(超详细)">
+				<h4 class="text-truncate oneline">
+						C语言函数操作大全----(超详细)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-12</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010258235/article/details/45666851" target="_blank" title="C语言函数操作大全----(超详细)">
+							<span class="desc oneline">fopen（打开文件）
+相关函数 open，fclose
+表头文件 #include
+定义函数 FILE * fopen(const char * path,const char * mode)...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u010258235">来自：	<span class="blog_title"> 独旅天涯</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/electech6/article/details/45509779,BlogCommendHotData_3"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/electech6/article/details/45509779,BlogCommendHotData_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/electech6/article/details/45509779" target="_blank" title="SLIC超像素分割详解（一）：简介">
+				<h4 class="text-truncate oneline">
+						SLIC超像素分割详解（一）：简介				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-05</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/electech6/article/details/45509779" target="_blank" title="SLIC超像素分割详解（一）：简介">
+							<span class="desc oneline">SLIC超像素分割详解（一）
+超像素概念是2003年Xiaofeng Ren提出和发展起来的图像分割技术，是指具有相似纹理、颜色、亮度等特征的相邻像素构成的有一定视觉意义的不规则像素块。它利用像素之间...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/electech6">来自：	<span class="blog_title"> electech6的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/iloveyin/article/details/39998651,BlogCommendHotData_4"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/iloveyin/article/details/39998651,BlogCommendHotData_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/iloveyin/article/details/39998651" target="_blank" title="腾讯视频解析接口">
+				<h4 class="text-truncate oneline">
+						腾讯视频解析接口				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/iloveyin/article/details/39998651" target="_blank" title="腾讯视频解析接口">
+							<span class="desc oneline">普通流视频（完整视频）
+
+http://vv.video.qq.com/geturl?vid=v00149uf4ir&amp;otype=json
+
+高清视频（分段视频）
+
+1080P-fhd，超...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/iloveyin">来自：	<span class="blog_title"> 专注于互联网架构技术，努力成为一名架构师</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013467442/article/details/50993977,BlogCommendHotData_5"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013467442/article/details/50993977,BlogCommendHotData_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013467442/article/details/50993977" target="_blank" title="使用java进行http通信">
+				<h4 class="text-truncate oneline">
+						使用java进行http通信				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-27</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4575</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013467442/article/details/50993977" target="_blank" title="使用java进行http通信">
+							<span class="desc oneline">Http通信概述Http通信主要有两种方式POST方式和GET方式。前者通过Http消息实体发送数据给服务器，安全性高，数据传输大小没有限制，后者通过URL的查询字符串传递给服务器参数，以明文显示在浏...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u013467442">来自：	<span class="blog_title"> 借你一秒</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq574857122/article/details/16361033,BlogCommendHotData_6"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq574857122/article/details/16361033,BlogCommendHotData_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq574857122/article/details/16361033" target="_blank" title="强连通分量及缩点tarjan算法解析">
+				<h4 class="text-truncate oneline">
+						强连通分量及缩点tarjan算法解析				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							49万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq574857122/article/details/16361033" target="_blank" title="强连通分量及缩点tarjan算法解析">
+							<span class="desc oneline">强连通分量：
+简言之 就是找环（每条边只走一次，两两可达）
+孤立的一个点也是一个连通分量 
+ 
+使用tarjan算法 在嵌套的多个环中优先得到最大环( 最小环就是每个孤立点）
+ 
+定义：
+int Ti...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq574857122">来自：	<span class="blog_title"> 九野的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/cmoooo/article/details/18794441,BlogCommendHotData_7"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/cmoooo/article/details/18794441,BlogCommendHotData_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/cmoooo/article/details/18794441" target="_blank" title="IE11 修改默认User-Agent方法">
+				<h4 class="text-truncate oneline">
+						IE11 修改默认User-Agent方法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							9196</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/cmoooo/article/details/18794441" target="_blank" title="IE11 修改默认User-Agent方法">
+							<span class="desc oneline">在运行中输入“gpedit.msc”打开本地组策略编辑器：
+
+
+
+
+
+
+在计算机配置-&gt;管理模板-&gt;Windows组件-&gt;Internet Explorer选项下，双击右侧设置中“自定义...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/cmoooo">来自：	<span class="blog_title"> .</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/keketrtr/article/details/52292089,BlogCommendHotData_8"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/keketrtr/article/details/52292089,BlogCommendHotData_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/keketrtr/article/details/52292089" target="_blank" title="jvisualvm 远程监控Linux下的tomcat（后附resin的配置）">
+				<h4 class="text-truncate oneline">
+						jvisualvm 远程监控Linux下的tomcat（后附resin的配置）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-23</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1827</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/keketrtr/article/details/52292089" target="_blank" title="jvisualvm 远程监控Linux下的tomcat（后附resin的配置）">
+							<span class="desc oneline">前一段测试系统崩溃过一回，所以想远程监控一下jvm的运行情况，我在网上也找了不少文章和办法，试了好几次都没成功，今天算试成功了，但是不太完美，因为需要将Linux的防火墙关掉才可以连接，我尝试将连接的...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/keketrtr">来自：	<span class="blog_title"> keketrtr的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zd0303/article/details/7058457,BlogCommendHotData_9"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zd0303/article/details/7058457,BlogCommendHotData_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zd0303/article/details/7058457" target="_blank" title="MATLAB中注释一段程序">
+				<h4 class="text-truncate oneline">
+						MATLAB中注释一段程序				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-09</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zd0303/article/details/7058457" target="_blank" title="MATLAB中注释一段程序">
+							<span class="desc oneline">在MATLAB中，可以注释一段程序。
+使用“%{”和“%}”。
+例如
+%{
+。。。
+%}
+即可。
+经典方法是用 if 0，但缺点是不够直观，注释掉的内容仍然保持代码的颜色。现在可以用
+...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zd0303">来自：	<span class="blog_title"> 知识小屋</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/UP19910522/article/details/38397569,BlogCommendHotData_10"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/UP19910522/article/details/38397569,BlogCommendHotData_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/UP19910522/article/details/38397569" target="_blank" title="spring-websocket框架搭建遇到的问题解决方案汇总">
+				<h4 class="text-truncate oneline">
+						spring-websocket框架搭建遇到的问题解决方案汇总				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/UP19910522/article/details/38397569" target="_blank" title="spring-websocket框架搭建遇到的问题解决方案汇总">
+							<span class="desc oneline">问题1 org.apache.tomcat.websocket.server.WsServerContainer cannot be cast to javax.websocket.server
+严...</span>
+						</a>
+						  <span class="blog_title_box oneline no-title">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/whatday/article/details/38147103,BlogCommendHotData_11"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/whatday/article/details/38147103,BlogCommendHotData_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/whatday/article/details/38147103" target="_blank" title="HTTPS和HTTP的区别">
+				<h4 class="text-truncate oneline">
+						HTTPS和HTTP的区别				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							7万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/whatday/article/details/38147103" target="_blank" title="HTTPS和HTTP的区别">
+							<span class="desc oneline">什么是 HTTPS?
+
+HTTPS (基于安全套接字层的超文本传输协议 或者是 HTTP over SSL) 是一个 Netscape 开发的 Web 协议。
+
+你也可以说：HTTPS = H...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/whatday">来自：	<span class="blog_title"> whatday的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/gefangshuai/article/details/50328451,BlogCommendHotData_12"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/gefangshuai/article/details/50328451,BlogCommendHotData_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/gefangshuai/article/details/50328451" target="_blank" title="关于SpringBoot bean无法注入的问题（与文件包位置有关）">
+				<h4 class="text-truncate oneline">
+						关于SpringBoot bean无法注入的问题（与文件包位置有关）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							13万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/gefangshuai/article/details/50328451" target="_blank" title="关于SpringBoot bean无法注入的问题（与文件包位置有关）">
+							<span class="desc oneline">问题场景描述整个项目通过Maven构建，大致结构如下：
+核心Spring框架一个module spring-boot-base
+service和dao一个module server-core
+提供系统...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/gefangshuai">来自：	<span class="blog_title"> 开发随笔</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/lincyang/article/details/44457799,BlogCommendHotData_13"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/lincyang/article/details/44457799,BlogCommendHotData_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lincyang/article/details/44457799" target="_blank" title="Android实战技巧之十九：android studio导出jar包（Module）并获得手机信息">
+				<h4 class="text-truncate oneline">
+						Android实战技巧之十九：android studio导出jar包（Module）并获得手机信息				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-19</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lincyang/article/details/44457799" target="_blank" title="Android实战技巧之十九：android studio导出jar包（Module）并获得手机信息">
+							<span class="desc oneline">AS中并没有独立的Module 工程，但是可以在普通的Project中加入Module。所谓的Module就是我们通常所指的模块化的一个单元，并常常以jar包的形式存在。下面以一个获取手机信息的例子演...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/lincyang">来自：	<span class="blog_title"> 懒人的技术笔记</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36523667/article/details/79242952,BlogCommendHotData_14"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36523667/article/details/79242952,BlogCommendHotData_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36523667/article/details/79242952" target="_blank" title="Android事件分发机制之源码完美解析（上）">
+				<h4 class="text-truncate oneline">
+						Android事件分发机制之源码完美解析（上）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-03</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							8193</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36523667/article/details/79242952" target="_blank" title="Android事件分发机制之源码完美解析（上）">
+							<span class="desc oneline">学事件分发是为了什么呢？还不是为了解决滑动冲突的。
+实际上，如果仅仅是为了解决滑动冲突的，大可不必看源码，只需要掌握事件分发的外在规律即可。
+
+
+只要记住这张图，再明白内部拦截法和外部拦截法，滑动冲突...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_36523667">来自：	<span class="blog_title"> qq_36523667的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/hero_fantao/article/details/34533533,BlogCommendHotData_15"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/hero_fantao/article/details/34533533,BlogCommendHotData_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hero_fantao/article/details/34533533" target="_blank" title="连续特征离散化和归一化">
+				<h4 class="text-truncate oneline">
+						连续特征离散化和归一化				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hero_fantao/article/details/34533533" target="_blank" title="连续特征离散化和归一化">
+							<span class="desc oneline">连续特征进行离散化处理。</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hero_fantao">来自：	<span class="blog_title"> hero_fantao的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/ROger__wonG/article/details/39755615,BlogCommendHotData_16"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/ROger__wonG/article/details/39755615,BlogCommendHotData_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ROger__wonG/article/details/39755615" target="_blank" title="Weka算法Clusterers-Xmeans源码分析（二）">
+				<h4 class="text-truncate oneline">
+						Weka算法Clusterers-Xmeans源码分析（二）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-03</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4362</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ROger__wonG/article/details/39755615" target="_blank" title="Weka算法Clusterers-Xmeans源码分析（二）">
+							<span class="desc oneline">Weka算法Clusterers-Xmeans源码分析（二）</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ROger__wonG">来自：	<span class="blog_title"> 锐之锋芒</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zhao1949/article/details/53642313,BlogCommendHotData_17"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zhao1949/article/details/53642313,BlogCommendHotData_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhao1949/article/details/53642313" target="_blank" title="maven 启动 报错 Fatal error compiling: 无效的目标发行版">
+				<h4 class="text-truncate oneline">
+						maven 启动 报错 Fatal error compiling: 无效的目标发行版				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhao1949/article/details/53642313" target="_blank" title="maven 启动 报错 Fatal error compiling: 无效的目标发行版">
+							<span class="desc oneline">http://news.tuxi.com.cn/news/119999990123162/31622105.html
+http://lyking2001.iteye.com/blog/837440
+*...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zhao1949">来自：	<span class="blog_title"> zhao1949的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wuchengzeng/article/details/50037611,BlogCommendHotData_18"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wuchengzeng/article/details/50037611,BlogCommendHotData_18"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wuchengzeng/article/details/50037611" target="_blank" title="jquery/js实现一个网页同时调用多个倒计时(最新的)">
+				<h4 class="text-truncate oneline">
+						jquery/js实现一个网页同时调用多个倒计时(最新的)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							37万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wuchengzeng/article/details/50037611" target="_blank" title="jquery/js实现一个网页同时调用多个倒计时(最新的)">
+							<span class="desc oneline">jquery/js实现一个网页同时调用多个倒计时(最新的)
+
+最近需要网页添加多个倒计时. 查阅网络,基本上都是千遍一律的不好用. 自己按需写了个.希望对大家有用. 有用请赞一个哦!
+
+
+
+//js
+...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wuchengzeng">来自：	<span class="blog_title"> Websites</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/ichsonx/article/details/48831277,BlogCommendHotData_19"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/ichsonx/article/details/48831277,BlogCommendHotData_19"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ichsonx/article/details/48831277" target="_blank" title="IntelliJ IDEA 项目相关的几个重要概念介绍">
+				<h4 class="text-truncate oneline">
+						IntelliJ IDEA 项目相关的几个重要概念介绍				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-30</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ichsonx/article/details/48831277" target="_blank" title="IntelliJ IDEA 项目相关的几个重要概念介绍">
+							<span class="desc oneline">IntelliJ IDEA 项目相关的几个重要概念介绍
+
+
+发布于 2015-09-23 23:02:48 | 11 次阅读 | 评论: 0 | 来源: 网络整理
+
+
+
+本篇内容为大家提...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ichsonx">来自：	<span class="blog_title"> ichsonx的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/lowprofile_coding/article/details/51059080,BlogCommendHotData_20"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/lowprofile_coding/article/details/51059080,BlogCommendHotData_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lowprofile_coding/article/details/51059080" target="_blank" title="程序员学习视频教程汇总">
+				<h4 class="text-truncate oneline">
+						程序员学习视频教程汇总				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lowprofile_coding/article/details/51059080" target="_blank" title="程序员学习视频教程汇总">
+							<span class="desc oneline">在IT这个节凑快的行业，我们每天都需要学习，需要get新技能，才能不被淘汰，成功的人总是贵在坚持，我觉得有一句话说的很好：“这个世界唯一公平的事情就是大家的时间都一样”.这里我给大家整理了几十个G的视...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/lowprofile_coding">来自：	<span class="blog_title"> 安辉</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/lsx991947534/article/details/45499205,BlogCommendHotData_21"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/lsx991947534/article/details/45499205,BlogCommendHotData_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lsx991947534/article/details/45499205" target="_blank" title="servlet+jsp实现过滤器，防止用户未登录访问">
+				<h4 class="text-truncate oneline">
+						servlet+jsp实现过滤器，防止用户未登录访问				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-05</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lsx991947534/article/details/45499205" target="_blank" title="servlet+jsp实现过滤器，防止用户未登录访问">
+							<span class="desc oneline">我们可能经常会用到这一功能，比如有时，我们不希望用户没有进行登录访问后台的操作页面，而且这样的非法访问会让系统极为的不安全，所以我们常常需要进行登录才授权访问其它页面，否则只会出现登录页面，当然我的思...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/lsx991947534">来自：	<span class="blog_title"> 沉默的鲨鱼的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/getcomputerstyle/article/details/70175167,BlogCommendHotData_22"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/getcomputerstyle/article/details/70175167,BlogCommendHotData_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/getcomputerstyle/article/details/70175167" target="_blank" title="使用python构造一个微信聊天机器人">
+				<h4 class="text-truncate oneline">
+						使用python构造一个微信聊天机器人				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4347</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/getcomputerstyle/article/details/70175167" target="_blank" title="使用python构造一个微信聊天机器人">
+							<span class="desc oneline">申请一个图灵的APIKEY http://www.tuling123.com/
+python3环境下安装wxpy
+pip install wxpy
+linux下还需安装pillow
+pip insta...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/getcomputerstyle">来自：	<span class="blog_title"> getcomputerstyle的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/hayixia606/article/details/79237220,BlogCommendHotData_23"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/hayixia606/article/details/79237220,BlogCommendHotData_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hayixia606/article/details/79237220" target="_blank" title="微信支付V3微信公众号支付PHP教程(thinkPHP5公众号支付)/JSSDK的使用">
+				<h4 class="text-truncate oneline">
+						微信支付V3微信公众号支付PHP教程(thinkPHP5公众号支付)/JSSDK的使用				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-02</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							10万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hayixia606/article/details/79237220" target="_blank" title="微信支付V3微信公众号支付PHP教程(thinkPHP5公众号支付)/JSSDK的使用">
+							<span class="desc oneline">扫二维码关注，获取更多技术分享
+
+
+  本文承接之前发布的博客《 微信支付V3微信公众号支付PHP教程/thinkPHP5公众号支付》必须阅读上篇文章后才可以阅读这篇文章。由于最近一段时间工作比较忙，...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hayixia606">来自：	<span class="blog_title"> Marswill</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013274055/article/details/77542143,BlogCommendHotData_24"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013274055/article/details/77542143,BlogCommendHotData_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013274055/article/details/77542143" target="_blank" title="linux开放端口的方法">
+				<h4 class="text-truncate oneline">
+						linux开放端口的方法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-24</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4366</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013274055/article/details/77542143" target="_blank" title="linux开放端口的方法">
+							<span class="desc oneline">1.方法一：
+以打开3306端口为例：
+命令1：/sbin/iptables -I INPUT -p tcp --dport 3306-j ACCEPT
+命令2：/etc/rc.d/init.d/ip...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u013274055">来自：	<span class="blog_title"> 少侠灬</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zhangweijiqn/article/details/53199553,BlogCommendHotData_25"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zhangweijiqn/article/details/53199553,BlogCommendHotData_25"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhangweijiqn/article/details/53199553" target="_blank" title="tensorflow在linux系统上的安装">
+				<h4 class="text-truncate oneline">
+						tensorflow在linux系统上的安装				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-17</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhangweijiqn/article/details/53199553" target="_blank" title="tensorflow在linux系统上的安装">
+							<span class="desc oneline">tensorflow在ubuntu系统上按照官方文档安装起来相对容易，在centos上由于没有apt-get（ yum）相对困难一些，本文会提到一些安装过程中遇到的一些坑及解放方案。...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zhangweijiqn">来自：	<span class="blog_title"> zhangweijiqn的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/xll_bit/article/details/54347666,BlogCommendHotData_26"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/xll_bit/article/details/54347666,BlogCommendHotData_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xll_bit/article/details/54347666" target="_blank" title="caffe-Windows：训练自己的数据">
+				<h4 class="text-truncate oneline">
+						caffe-Windows：训练自己的数据				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5479</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xll_bit/article/details/54347666" target="_blank" title="caffe-Windows：训练自己的数据">
+							<span class="desc oneline">以下流程是根据博客http://blog.csdn.net/zb1165048017/article/details/52447567；并根据自己的实际经验而成，亲测可用。
+以下路径多是绝对路径，需要...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xll_bit">来自：	<span class="blog_title"> xll_bit的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36892341/article/details/73918672,BlogCommendHotData_27"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36892341/article/details/73918672,BlogCommendHotData_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36892341/article/details/73918672" target="_blank" title="linux上安装Docker(非常简单的安装方法)">
+				<h4 class="text-truncate oneline">
+						linux上安装Docker(非常简单的安装方法)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							16万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36892341/article/details/73918672" target="_blank" title="linux上安装Docker(非常简单的安装方法)">
+							<span class="desc oneline">最近比较有空，大四出来实习几个月了，作为实习狗的我，被叫去研究Docker了，汗汗！
+
+Docker的三大核心概念：镜像、容器、仓库
+镜像：类似虚拟机的镜像、用俗话说就是安装文件。
+容器：类似一个轻量...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_36892341">来自：	<span class="blog_title"> 我走小路的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+        <div class="recommend-item-box type_hot_word">
+            <div class="content clearfix">
+        <div class="word float-left">
+                          <span>
+            <a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+            机器学习          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+            机器学习课程          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+            机器学习教程          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/combos/o5329_s5331_l0_t " target="_blank">
+            深度学习视频教程          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/combos/o5329_s5331_l0_t " target="_blank">
+            深度学习学习          </a></span>
+                        </div>
+      </div>
+                  <div class="content clearfix">
+        <div class="float-left">
+                  <span>
+            <a href="https://www.csdn.net/gather_2b/MtTakg3sOTQ3NC1ibG9n.html" target="_blank">
+            android 线程池简单使用</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_28/MtTakg4sMTAxNS1ibG9n.html" target="_blank">
+            android php简单使用</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_21/MtzakgysNS1ibG9n.html" target="_blank">
+            c#如何关闭git</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_22/MtTakg4sNTI0OS1ibG9n.html" target="_blank">
+            android git删除文件</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_20/MtTakg4sNjE2MS1ibG9n.html" target="_blank">
+            android git使用 studio</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_4a/NtjaQg1sMC1lZHUO0O0O.html" target="_blank">
+            简明python教程git</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_4a/MtSa1glsZHUO0O0O.html" target="_blank">
+            python教程+chm</a>
+          </span>
+                </div>
+      </div>
+          </div>
+
+
+            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <!-- <h3 class="aside-title">个人资料</h3> -->
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/wwj_748">
+                <img src="https://avatar.csdn.net/C/C/8/3_wwj_748.jpg" class="avatar_pic">
+            </a>
+            
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/wwj_748" target="_blank" class="" id="uid">IT_xiao小巫</a>
+            </p>
+                          <p class="flag expert">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#csdnc-blogexpert"></use>
+                </svg>
+                博客专家
+              </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a class="btn btn-sm btn-red-hollow attention" id="btnAttent">关注</a>
+            </span>
+        </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="669">
+                        <dt><a href="https://blog.csdn.net/wwj_748?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/wwj_748?t=1"><span class="count">669</span></a></dd>
+                    </dl>
+        <dl class="text-center" id="fanBox" title="8965">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">8965</span></dd>
+        </dl>
+        <dl class="text-center" title="2565">
+            <dt>喜欢</dt>
+            <dd><span class="count">2565</span></dd>
+        </dl>
+        <dl class="text-center" title="2838">
+            <dt>评论</dt>
+            <dd><span class="count">2838</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="8级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-8"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="5553461">
+                555万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="47069">
+                4万+            </dd>
+        </dl>
+        <dl title="93">
+            <dt>排名：</dt>
+            <dd>93</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                <div class="icon-badge" title="专栏达人">
+            <div class="mouse-box">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-m-columns"></use>
+                </svg>
+                <div class="icon-arrow"></div>
+            </div>
+            <div class="grade-detail-box">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-columns"></use>
+                        </svg>
+                        <p>专栏达人</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予成功创建个人博客专栏的用户。专栏中添加五篇以上博文即可点亮！撰写博客专栏浓缩技术精华，专栏达人就是你！
+                    </div>
+                </div>
+            </div>
+        </div>
+                                                        <script>
+            (function ($) {
+                setTimeout(function(){
+                    $('div.icon-badge.show-moment').removeClass('show-moment');
+                }, 5000);
+            })(window.jQuery)
+        </script>
+    </div>
+    </div>
+		    		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wwj_748/article/details/86625021" target="_blank">升级Gradle 3.0重命名Apk并输出指定目录</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wwj_748/article/details/85397464" target="_blank">2018年大型废柴现场</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wwj_748/article/details/83551889" target="_blank">Android应用更新实现策略-巫文杰-专题视频课程</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wwj_748/article/details/83550708" target="_blank">Android入门实战教程-巫文杰-专题视频课程</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wwj_748/article/details/82718438" target="_blank">为什么道理懂那么多，你依然是个弱鸡</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    <!--自定义模块-->
+<div id="asideCustom38181733" class="aside-box custom-box">
+    <h3 class="aside-title">尽情骚扰我</h3>
+    <div class="aside-content clearfix">
+        <h3>微信公众号：wwjblog</h3>
+<img src="https://raw.githubusercontent.com/fanatic-mobile-developer-for-android/A-week-to-develop-android-app-plan/master/images/wwjblog.jpg" width="150px" height="150px">
+<br>
+移动开发者狂热群：注明入群理由，里面有一群热爱分享的开发者
+<ul>
+<li xss=removed>Q群：299402133</li>
+<li xss=removed>QQ号：659982592</li>
+</ul>    </div>
+</div>
+		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/2547719">
+                    <span class="title oneline">【Android CSDN博客客户端开发】</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1529925">
+                    <span class="title oneline">【Android 新浪微博客户端开发】</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1342194">
+                    <span class="title oneline">【 Android 小巫新闻客户端开发】</span>
+                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1119319">
+                    <span class="title oneline">【Android开发学习之路】</span>
+                    <span class="count float-right">119篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1572115">
+                    <span class="title oneline">【Android UI效果锦集】</span>
+                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1833855">
+                    <span class="title oneline">【Android开发记录】</span>
+                    <span class="count float-right">95篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1773747">
+                    <span class="title oneline">【Android设计模式系列】</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1845765">
+                    <span class="title oneline">【Android通讯录模块开发】</span>
+                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1846803">
+                    <span class="title oneline">【Android自定义组件】</span>
+                    <span class="count float-right">14篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/2143091">
+                    <span class="title oneline">【cocos2d-x】</span>
+                    <span class="count float-right">36篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1399759">
+                    <span class="title oneline">【求职面试】</span>
+                    <span class="count float-right">16篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/2293377">
+                    <span class="title oneline">【Lua脚本语言】</span>
+                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1401254">
+                    <span class="title oneline">【技能提升之设计模式】</span>
+                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1081018">
+                    <span class="title oneline">【成长记录之记录点滴】</span>
+                    <span class="count float-right">91篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/2225849">
+                    <span class="title oneline">【建站经验】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1935343">
+                    <span class="title oneline">【网络协议】</span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1908067">
+                    <span class="title oneline">【Go语言程序设计】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/2173325">
+                    <span class="title oneline">【Mac os】</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/2909409">
+                    <span class="title oneline">【人工智能】</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/2910593">
+                    <span class="title oneline">【python】</span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/3054285">
+                    <span class="title oneline">【Ant脚本构建】</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/3054287">
+                    <span class="title oneline">【Gradle脚本构建】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/6202952">
+                    <span class="title oneline">【JNI &amp;&amp; NDK】</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1092985">
+                    <span class="title oneline">【Java语言程序设计】</span>
+                    <span class="count float-right">50篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/6079740">
+                    <span class="title oneline">【产品】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/6107656">
+                    <span class="title oneline">【Unity 3D】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1355011">
+                    <span class="title oneline">【PHP语言程序设计】</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1235229">
+                    <span class="title oneline">【C#语言程序设计】</span>
+                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1305701">
+                    <span class="title oneline">【操作系统之Linux】</span>
+                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1242648">
+                    <span class="title oneline">【SQL Server 数据库】</span>
+                    <span class="count float-right">18篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1287243">
+                    <span class="title oneline">【脚本语言之JavaScript】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1325327">
+                    <span class="title oneline">【大学课程之计算机网络】</span>
+                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1440029">
+                    <span class="title oneline">【大学课程之软件工程】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1342012">
+                    <span class="title oneline">【大学课程之ASP.Net】</span>
+                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/886048">
+                    <span class="title oneline">【大学课程之数据结构】</span>
+                    <span class="count float-right">27篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1160170">
+                    <span class="title oneline">【大学学科杂货】</span>
+                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1242647">
+                    <span class="title oneline">【大学课程之Java EE】</span>
+                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1358154">
+                    <span class="title oneline">【大学课程之算法分析与设计】</span>
+                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1307625">
+                    <span class="title oneline">【大学课程之编译原理】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/1881325">
+                    <span class="title oneline">【大学本科毕业设计专题】</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/6205323">
+                    <span class="title oneline">【经验分享】</span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/6545633">
+                    <span class="title oneline">【Bugly】</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/7016901">
+                    <span class="title oneline">【React Native】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/7536390">
+                    <span class="title oneline">【机器翻译】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wwj_748/article/category/8284037">
+                    <span class="title oneline">视频教程</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2019/01">
+                    2019年1月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/12">
+                    2018年12月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/09">
+                    2018年9月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/06">
+                    2018年6月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/05">
+                    2018年5月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/03">
+                    2018年3月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/02">
+                    2018年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2018/01">
+                    2018年1月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/12">
+                    2017年12月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/11">
+                    2017年11月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/09">
+                    2017年9月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/07">
+                    2017年7月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/06">
+                    2017年6月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/05">
+                    2017年5月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/04">
+                    2017年4月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/03">
+                    2017年3月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/02">
+                    2017年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2017/01">
+                    2017年1月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/12">
+                    2016年12月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/11">
+                    2016年11月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/10">
+                    2016年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/09">
+                    2016年9月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/08">
+                    2016年8月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/07">
+                    2016年7月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/06">
+                    2016年6月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/05">
+                    2016年5月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/04">
+                    2016年4月                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/03">
+                    2016年3月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/02">
+                    2016年2月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2016/01">
+                    2016年1月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/12">
+                    2015年12月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/11">
+                    2015年11月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/10">
+                    2015年10月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/09">
+                    2015年9月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/08">
+                    2015年8月                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/07">
+                    2015年7月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/06">
+                    2015年6月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/05">
+                    2015年5月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/04">
+                    2015年4月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/03">
+                    2015年3月                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/02">
+                    2015年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2015/01">
+                    2015年1月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/12">
+                    2014年12月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/11">
+                    2014年11月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/10">
+                    2014年10月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/09">
+                    2014年9月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/08">
+                    2014年8月                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/07">
+                    2014年7月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/06">
+                    2014年6月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/05">
+                    2014年5月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/04">
+                    2014年4月                    <span class="count float-right">14篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/03">
+                    2014年3月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/02">
+                    2014年2月                    <span class="count float-right">16篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2014/01">
+                    2014年1月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/12">
+                    2013年12月                    <span class="count float-right">15篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/11">
+                    2013年11月                    <span class="count float-right">23篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/10">
+                    2013年10月                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/09">
+                    2013年9月                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/08">
+                    2013年8月                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/07">
+                    2013年7月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/06">
+                    2013年6月                    <span class="count float-right">17篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/05">
+                    2013年5月                    <span class="count float-right">28篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/04">
+                    2013年4月                    <span class="count float-right">18篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/03">
+                    2013年3月                    <span class="count float-right">20篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/02">
+                    2013年2月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2013/01">
+                    2013年1月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/12">
+                    2012年12月                    <span class="count float-right">20篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/11">
+                    2012年11月                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/10">
+                    2012年10月                    <span class="count float-right">14篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/09">
+                    2012年9月                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/08">
+                    2012年8月                    <span class="count float-right">23篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/07">
+                    2012年7月                    <span class="count float-right">18篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/06">
+                    2012年6月                    <span class="count float-right">15篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/05">
+                    2012年5月                    <span class="count float-right">36篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/04">
+                    2012年4月                    <span class="count float-right">27篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/03">
+                    2012年3月                    <span class="count float-right">47篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/02">
+                    2012年2月                    <span class="count float-right">16篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2012/01">
+                    2012年1月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2011/12">
+                    2011年12月                    <span class="count float-right">28篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2011/11">
+                    2011年11月                    <span class="count float-right">33篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2011/10">
+                    2011年10月                    <span class="count float-right">14篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wwj_748/article/month/2011/09">
+                    2011年9月                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/wwj_748/article/details/10079311">Android UI-开源框架ImageLoader的完美例子</a>
+					<p class="read">阅读数 <span>220350</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wwj_748/article/details/38778631">Android自定义DataTimePicker（日期选择器）</a>
+					<p class="read">阅读数 <span>160886</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wwj_748/article/details/8902071">Android应用开发--MP3音乐播放器代码实现（一）</a>
+					<p class="read">阅读数 <span>151360</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wwj_748/article/details/25653409">Android-自定义PopupWindow</a>
+					<p class="read">阅读数 <span>81849</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wwj_748/article/details/8927784">Android自定义照相机实现（拍照、保存到SD卡，利用Bundle在Acitivity交换数据）</a>
+					<p class="read">阅读数 <span>73638</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wwj_748/article/details/30072379#comments">Cocos2d-x 2.2.3 使...</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/yanzhihong007" class="user-name" target="_blank">yanzhihong007：</a>可以，学习                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wwj_748/article/details/30072379#comments">Cocos2d-x 2.2.3 使...</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/boling_cavalry" class="user-name" target="_blank">boling_cavalry：</a>可以的，学习了                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wwj_748/article/details/8902071#comments">Android应用开发--MP3音...</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/YUANZHOU360" class="user-name" target="_blank">YUANZHOU360：</a>大佬，能发一份源码吗，2088622976@qq.com  万分感谢                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wwj_748/article/details/78135879#comments">Python 将pdf转成图片</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/weixin_42431935" class="user-name" target="_blank">weixin_42431935：</a>能仔细点吗                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wwj_748/article/details/51278689#comments">面试求职-你们想知道的腾讯面经</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/weixin_42883530" class="user-name" target="_blank">weixin_42883530：</a>给了多少k？                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">
+            <div id="dmp_ad_69"><div id="kp_box_69" data-pid="69" data-track-view='{"mod":"kp_popu_69-796","con":",,"}' data-track-click='{"mod":"kp_popu_69-796","con":",,"}'><div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://edu.csdn.net/topic/python115?utm_source=ditong" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">Python怎么学</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #00BFFF;padding:2px 5px 0px 5px;background:#FFF0F5;">
+<a href="https://edu.csdn.net/topic/ai30?utm_source=ditong" target="_blank" style="color:#00BFFF;font-weight:bold;text-decoration:none;font-size:15px;">转型AI人工智能指南</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://edu.csdn.net/topic/java1?utm_source=ditong" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">Java学习路线</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #00BFFF;padding:2px 5px 0px 5px;background:#FFF0F5;">
+<a href="https://gitbook.cn/gitchat/column/5c86261f029620739b167498?utm_source=wzl190315" target="_blank" style="color:#00BFFF;font-weight:bold;text-decoration:none;font-size:15px;">28 天算法训练营</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="http://hdg12tzyd1ot89h9.mikecrm.com/8z9C2RJ" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">开发者调查报告</a>
+</div>
+
+
+
+<div style="float:left;">
+<script type="text/javascript" src="//rabc1.iteye.com/common/js/ndr3h.js?b=wosyvccl"></script>
+<!-- 长文字链
+<script type="text/javascript" src="//rabc1.iteye.com/common/5klj5.js?kfxbghx=bx"></script>
+-->
+</div></div></div>            		</span>
+		<div class="pulllog-btn float-right clearfix">
+            <div class="float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                <a class="pulllog-login">登录</a>
+            </div>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li class="btn-like-box ">
+			<button class=" low-height hover-box btn-like " title="点赞">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<span class="hover-show text-box text">
+					<span class="no-active">点赞</span>
+					<span class="active">取消点赞</span>
+				</span>
+				<p>0</p>
+			</button>
+		</li>
+		<li class="">
+						<a class="btn-comments low-height hover-box" title="写评论" href="#commentBox">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg>
+				<span class="hover-show text">评论</span>
+				<p class="">
+										</p>
+			</a>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc low-height hover-box" title="目录">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg>
+				<span class="hover-show text">目录</span>
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark low-height hover-box" title="收藏">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg>
+					<span class="hover-show text">收藏</span>
+				<!-- <span class="hover-show text-box text">
+					<span class="no-active">收藏</span>
+					<span class="active">取消收藏</span>
+				</span> -->
+			</button>
+		</li>
+		<li class="bdsharebuttonbox">
+			<div class="weixin-qr btn-comments low-height hover-box" >
+        <a href="#" class="bds_weixin clear-share-style" data-cmd="weixin" title="手机看"></a>
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-usephone"></use>
+				</svg>
+				<span class="hover-show text text3">
+					手机看
+				</span>
+			</div>
+		</li>
+							<li class="widescreen-hide">
+				<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/wwj_748/article/details/73350782" title="Realm技术选型初体验">
+					<svg class="icon hover-hide" aria-hidden="true">
+						<use xlink:href="#csdnc-chevronleft"></use>
+					</svg>
+					<span class="hover-show text text3">上一篇</span>
+				</a>
+			</li>
+								<li class="widescreen-hide">
+			<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/wwj_748/article/details/74908740" title="React Native 音频录制例子来解惑入门">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-chevronright"></use>
+				</svg>
+				<span class="hover-show text text3">下一篇</span>
+			</a>
+		</li>
+						<!-- 宽屏更多按钮 -->
+		<li class="widescreen-more">
+			<a class="btn-comments chat-ask-button low-height hover-box" title="快问" href="#chatqa">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-more"></use>
+				</svg>
+				<span class="hover-show text">更多</span>
+				
+			</a>
+			<ul class="widescreen-more-box">
+													<li class="widescreen-more">
+						<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/wwj_748/article/details/73350782" title="Realm技术选型初体验">
+							<svg class="icon hover-hide" aria-hidden="true">
+								<use xlink:href="#csdnc-chevronleft"></use>
+							</svg>
+							<span class="hover-show text text3">上一篇</span>
+						</a>
+					</li>
+																<li class="widescreen-more">
+					<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/wwj_748/article/details/74908740" title="React Native 音频录制例子来解惑入门">
+						<svg class="icon hover-hide" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronright"></use>
+						</svg>
+						<span class="hover-show text text3">下一篇</span>
+					</a>
+				</li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 78;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = articleTitles;
+    var ChannelId = 1;
+    var articleId = "73991862";
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/wwj_748/article/details/73991862";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "Git Submodule简单使用 - 巫山老妖";
+    var needInsertBaidu = true;
+    // 代码段样式
+    var codeStyle = '';
+		var highlight = ["git","submodule","\u7b80\u5355\u4f7f\u7528"];//高亮数组
+		// 相关推荐博主数据
+    var RecommendBlogExpertList = [{"user_name":"isea533","nick_name":"isea533","avatar":"https:\/\/avatar.csdn.net\/D\/5\/F\/3_isea533.jpg","is_expert":true,"article_count":287,"rank":"516"},{"user_name":"zcxwww","nick_name":"\u8212\u5927\u98de","avatar":"https:\/\/avatar.csdn.net\/C\/0\/2\/3_zcxwww.jpg","is_expert":false,"article_count":81,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"denghepingpeace","nick_name":"\u9738\u6c14\u548c\u5e73","avatar":"https:\/\/avatar.csdn.net\/3\/3\/D\/3_denghepingpeace.jpg","is_expert":false,"article_count":15,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"wag2765","nick_name":"\u7384\u51acWong","avatar":"https:\/\/avatar.csdn.net\/C\/8\/D\/3_wag2765.jpg","is_expert":false,"article_count":408,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"Smallsun_229","nick_name":"\u5c0f\u592dyao\u7231\u5403\u7cd6\u7cd6\u7cd6","avatar":"https:\/\/avatar.csdn.net\/2\/F\/2\/3_smallsun_229.jpg","is_expert":false,"article_count":49,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"u011361138","nick_name":"\u8303\u7ffb\u756a\u6a0a","avatar":"https:\/\/avatar.csdn.net\/3\/C\/6\/3_u011361138.jpg","is_expert":false,"article_count":29,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"wodenhaowzg","nick_name":"\u7231\u7a0b\u7d6e","avatar":"https:\/\/avatar.csdn.net\/E\/6\/C\/3_wodenhaowzg.jpg","is_expert":false,"article_count":3,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"zengfenliang","nick_name":"Kslient","avatar":"https:\/\/avatar.csdn.net\/B\/8\/A\/3_zengfenliang.jpg","is_expert":false,"article_count":137,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"wkyseo","nick_name":"KongyunWu","avatar":"https:\/\/avatar.csdn.net\/3\/5\/0\/3_wkyseo.jpg","is_expert":false,"article_count":62,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"zhyshamily","nick_name":"zhyshamily","avatar":"https:\/\/avatar.csdn.net\/4\/A\/9\/3_zhyshamily.jpg","is_expert":false,"article_count":1,"rank":"\u5343\u91cc\u4e4b\u5916"}];
+	var articleType = 1;
+	var CopyrightContent = '本文为博主原创文章，未经博主允许不得转载。';
+    var current_user_name = '';
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201811201455'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,articleTit);
+        }
+    })
+</script>
+
+</body>
+
+<!-- 高亮未与 markdown兼容  -->
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.8/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">
+	<script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/pc_wap_common-98040b5dc6.js" /></script>
+	
+	<!-- <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/markdownCopy-718168246b.js" /></script> -->
+
+
+<script src="//g.csdnimg.cn/??login-box/1.0.5/login-box.js,login-box/1.0.5/login-auto.js?t=20190307095522"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-54efcefd0c.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-88e152fce1.min.js"></script>
+
+<script src="//g.csdnimg.cn/baidu-search/1.0.0/baidu-search.js"  type="text/javascript"></script>
+	<script src="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-fc7383b956.min.js"></script>
+
+
+<!-- <script type="text/javascript" src="//g.csdnimg.cn/check-adb/1.0.2/check-adb.js"></script> -->
+
+<script type="text/javascript" src="https://csdnimg.cn/release/blog_mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+<script type="text/javascript">
+    </script>
+<script src="https://gh.bdstatic.com/static/gh/js/sdk/bword.min.js"></script>
+</html>

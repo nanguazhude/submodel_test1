@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+    <title>Git Submodule管理项目子模块 - nicksheng - 博客园</title>
+<meta property="og:description" content="当项目越来越庞大之后，不可避免的要拆分成多个子模块，我们希望各个子模块有独立的版本管理，并且由专门的人去维护，这时候我们就要用到git的submodule功能。">
+    <link type="text/css" rel="stylesheet" href="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/bundle-SimpleMemory.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/bundle-SimpleMemory-mobile.css">
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/nicksheng/rss">
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/nicksheng/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/nicksheng/wlwmanifest.xml">
+    <script async="" src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/analytics.js"></script><script src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/jquery-2.js"></script>
+    <script>var currentBlogId=314748;var currentBlogApp='nicksheng',cb_enable_mathjax=false;var isLogined=false;</script>
+    <script src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/nicksheng/"><img id="blogLogo" src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/nicksheng/">nicksheng</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/nicksheng/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/nicksheng">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/nicksheng/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/nicksheng/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 1&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 4</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+        <div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/nicksheng/p/6201711.html">Git Submodule管理项目子模块</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown"><h2 id="使用场景">使用场景</h2>
+<p>当项目越来越庞大之后，不可避免的要拆分成多个子模块，我们希望各个子模块有独立的版本管理，并且由专门的人去维护，这时候我们就要用到git的submodule功能。</p>
+<h2 id="常用命令">常用命令</h2>
+<pre class="shell"><code class="hljs">git clone &lt;repository&gt; --recursive 递归的方式克隆整个项目
+git submodule add &lt;repository&gt; &lt;path&gt; 添加子模块
+git submodule init 初始化子模块
+git submodule update 更新子模块
+git submodule foreach git pull 拉取所有子模块</code></pre>
+<h2 id="如何使用">如何使用</h2>
+<h3 id="创建带子模块的版本库">1. 创建带子模块的版本库</h3>
+<p>例如我们要创建如下结构的项目</p>
+<pre><code class="hljs lua">project
+  |<span class="hljs-comment">--moduleA</span>
+  |<span class="hljs-comment">--readme.txt</span></code></pre>
+<p>创建project版本库，并提交readme.txt文件</p>
+<pre class="shell"><code class="hljs">git init --bare project.git
+git clone project.git project1
+cd project1
+echo "This is a project." &gt; readme.txt
+git add .
+git commit -m "add readme.txt"
+git push origin master
+cd ..</code></pre>
+<p>创建moduleA版本库，并提交a.txt文件</p>
+<pre class="shell"><code class="hljs">git init --bare moduleA.git
+git clone moduleA.git moduleA1
+cd moduleA1
+echo "This is a submodule." &gt; a.txt
+git add .
+git commit -m "add a.txt"
+git push origin master
+cd ..</code></pre>
+<p>在project项目中引入子模块moduleA，并提交子模块信息</p>
+<pre class="shell"><code class="hljs">cd project1
+git submodule add ../moduleA.git moduleA
+git status
+git diff
+git add .
+git commit -m "add submodule"
+git push origin master
+cd ..</code></pre>
+<p>使用<code>git status</code>可以看到多了两个需要提交的文件，其中<code>.gitmodules</code>指定submodule的主要信息，包括子模块的路径和地址信息，<code>moduleA</code>指定了子模块的commit id，使用<code>git diff</code>可以看到这两项的内容。这里需要指出父项目的git并不会记录submodule的文件变动，它是按照commit id指定submodule的git header，所以<code>.gitmodules</code>和<code>moduleA</code>这两项是需要提交到父项目的远程仓库的。</p>
+<pre><code class="hljs vhdl"><span class="hljs-keyword">On</span> branch master
+Your branch <span class="hljs-keyword">is</span> up-<span class="hljs-keyword">to</span>-date <span class="hljs-keyword">with</span> <span class="hljs-symbol">'origin</span>/master'.
+Changes <span class="hljs-keyword">to</span> be committed:
+  (<span class="hljs-keyword">use</span> <span class="hljs-string">"git reset HEAD &lt;file&gt;..."</span> <span class="hljs-keyword">to</span> unstage)
+    <span class="hljs-keyword">new</span> <span class="hljs-keyword">file</span>:   .gitmodules
+    <span class="hljs-keyword">new</span> <span class="hljs-keyword">file</span>:   moduleA</code></pre>
+<h3 id="克隆带子模块的版本库">2. 克隆带子模块的版本库</h3>
+<p>方法一，先clone父项目，再初始化submodule，最后更新submodule，初始化只需要做一次，之后每次只需要直接update就可以了，需要注意submodule默认是不在任何分支上的，它指向父项目存储的submodule commit id。</p>
+<pre class="shell"><code class="hljs">git clone project.git project2
+cd project2
+git submodule init
+git submodule update
+cd ..</code></pre>
+<p>方法二，采用递归参数<code>--recursive</code>，需要注意同样submodule默认是不在任何分支上的，它指向父项目存储的submodule commit id。</p>
+<pre class="shell"><code class="hljs">git clone project.git project3 --recursive</code></pre>
+<h3 id="修改子模块">3. 修改子模块</h3>
+<p>修改子模块之后只对子模块的版本库产生影响，对父项目的版本库不会产生任何影响，如果父项目需要用到最新的子模块代码，我们需要更新父项目中submodule commit id，默认的我们使用<code>git status</code>就可以看到父项目中submodule commit id已经改变了，我们只需要再次提交就可以了。</p>
+<pre class="shell"><code class="hljs">cd project1/moduleA
+git branch
+echo "This is a submodule." &gt; b.txt
+git add .
+git commit -m "add b.txt"
+git push origin master
+cd ..
+git status
+git diff
+git add .
+git commit -m "update submodule add b.txt"
+git push origin master
+cd ..</code></pre>
+<h3 id="更新子模块">4. 更新子模块</h3>
+<p>更新子模块的时候要注意子模块的分支默认不是master。</p>
+<p>方法一，先pull父项目，然后执行<code>git submodule update</code>，注意moduleA的分支始终不是master。</p>
+<pre class="shell"><code class="hljs">cd project2
+git pull
+git submodule update
+cd ..</code></pre>
+<p>方法二，先进入子模块，然后切换到需要的分支，这里是master分支，然后对子模块pull，这种方法会改变子模块的分支。</p>
+<pre class="shell"><code class="hljs">cd project3/moduleA
+git checkout master
+cd ..
+git submodule foreach git pull
+cd ..</code></pre>
+<h3 id="删除子模块">5. 删除子模块</h3>
+<p>网上有好多用的是下面这种方法</p>
+<pre class="shell"><code class="hljs">git rm --cached moduleA
+rm -rf moduleA
+rm .gitmodules
+vim .git/config</code></pre>
+<p>删除submodule相关的内容，例如下面的内容</p>
+<pre><code class="hljs groovy">[submodule <span class="hljs-string">"moduleA"</span>]
+      url = <span class="hljs-regexp">/Users/</span>nick<span class="hljs-regexp">/dev/</span>nick-doc<span class="hljs-regexp">/testGitSubmodule/</span>moduleA.git</code></pre>
+<p>然后提交到远程服务器</p>
+<pre class="shell"><code class="hljs">git add .
+git commit -m "remove submodule"</code></pre>
+<p>但是我自己本地实验的时候，发现用下面的方式也可以，服务器记录的是<code>.gitmodules</code>和<code>moduleA</code>，
+本地只要用git的删除命令删除moduleA，再用git 
+status查看状态就会发现.gitmodules和moduleA这两项都已经改变了，至于.git/config，仍会记录submodule信
+息，但是本地使用也没发现有什么影响，如果重新从服务器克隆则.git/config中不会有submodule信息。</p>
+<pre class="shell"><code class="hljs">git rm moduleA
+git status
+git commit -m "remove submodule"
+git push origin master</code></pre>
+</div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/nicksheng/category/928795.html" target="_blank">git</a></div>
+<div id="EntryTag">标签: <a href="https://www.cnblogs.com/nicksheng/tag/git/">git</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(6201711,cb_blogId,1);green_channel_success(this,'谢谢推荐！');">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow('51ec640c-00a0-e611-845c-ac853d9f53ac');" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/nicksheng/" target="_blank"><img src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/nicksheng/">nicksheng</a><br>
+            <a href="http://home.cnblogs.com/u/nicksheng/followees">关注 - 0</a><br>
+            <a href="http://home.cnblogs.com/u/nicksheng/followers">粉丝 - 1</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow('51ec640c-00a0-e611-845c-ac853d9f53ac');return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(6201711,'Digg')">
+        <span class="diggnum" id="digg_count">4</span>
+    </div>
+    <div class="buryit" onclick="votePost(6201711,'Bury')">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2016-12-26 15:14</span> <a href="https://www.cnblogs.com/nicksheng/">nicksheng</a> 阅读(<span id="post_view_count">62850</span>) 评论(<span id="post_comment_count">4</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=6201711" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6201711);return false;">收藏</a></div>
+	</div>
+	<script src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/highlight.js"></script><script>markdown_highlight();</script><script type="text/javascript">var allowComments=true,cb_blogId=314748,cb_entryId=6201711,cb_blogApp=currentBlogApp,cb_blogUserGuid='51ec640c-00a0-e611-845c-ac853d9f53ac',cb_entryCreatedDate='2016/12/26 15:14:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=true;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="#3943336" class="layer">#1楼</a><a name="3943336" id="comment_anchor_3943336"></a>  <span class="comment_date">2018-04-06 11:53</span> <a id="a_comment_author_3943336" href="https://www.cnblogs.com/yaoxiaowen/" target="_blank">eleven_yw</a> <a href="http://msg.cnblogs.com/send/eleven_yw" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3943336" class="blog_comment_body">有用</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3943336,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3943336,'Bury',this)">反对(0)</a></div><span id="comment_3943336_avatar" style="display:none;">http://pic.cnblogs.com/face/918357/20161122225949.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="#3988410" class="layer">#2楼</a><a name="3988410" id="comment_anchor_3988410"></a>  <span class="comment_date">2018-06-01 14:38</span> <a id="a_comment_author_3988410" href="https://www.cnblogs.com/w-quan/" target="_blank">stvten</a> <a href="http://msg.cnblogs.com/send/stvten" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3988410" class="blog_comment_body">git submodule add <a href="http://quan.wang/" target="_blank">http://quan.wang</a>@stash.weimob.com/scm/h/jingxuan-operation.git src/routes<br>'src/routes' already exists in the index，<br>大佬，我添加子模块到多层目录中就报错了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3988410,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3988410,'Bury',this)">反对(0)</a></div><span id="comment_3988410_avatar" style="display:none;">http://pic.cnblogs.com/face/1137821/20170710133900.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="#3996845" class="layer">#3楼</a><a name="3996845" id="comment_anchor_3996845"></a>  <span class="comment_date">2018-06-12 17:52</span> <a id="a_comment_author_3996845" href="https://www.cnblogs.com/yaoxiaowen/" target="_blank">eleven_yw</a> <a href="http://msg.cnblogs.com/send/eleven_yw" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3996845" class="blog_comment_body">有用。感谢</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3996845,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3996845,'Bury',this)">反对(0)</a></div><span id="comment_3996845_avatar" style="display:none;">http://pic.cnblogs.com/face/918357/20161122225949.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="#4109187" class="layer">#4楼</a><a name="4109187" id="comment_anchor_4109187"></a><span id="comment-maxId" style="display:none;">4109187</span><span id="comment-maxDate" style="display:none;">2018/11/7 21:38:37</span>  <span class="comment_date">2018-11-07 21:38</span> <a id="a_comment_author_4109187" href="https://www.cnblogs.com/ChrisCoder/" target="_blank">Chris_lzy</a> <a href="http://msg.cnblogs.com/send/Chris_lzy" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4109187" class="blog_comment_body">小兄弟，你博客写的很好啊，为什么不继续写了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4109187,'Digg',this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4109187,'Bury',this)">反对(0)</a></div><span id="comment_4109187_avatar" style="display:none;">http://pic.cnblogs.com/face/912532/20170720213353.png</span>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login('commentform');">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="https://edu.51cto.com/activity/19.html?source=bky" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'T2-51CTO')">【幸运】99%的人不知道我们有可以帮你薪资翻倍的秘笈！</a><br><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'T2-工控')">【推荐】超50万C++/C#源码: 大型实时仿真组态图形源码</a><br><a href="https://cloud.baidu.com/campaign/purchase-2019/index.html?track=cp:dsp|pf:pc|pp:chui-bokeyuan-huodong-19caigouji-BCC-neiyeCH-190311|pu:neiyeCH-wenzilian|ci:2019cgj|kw:2105959" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'T2-百度云')">【推荐】百度云“猪”你开年行大运，红包疯狂拿</a><br><a href="https://ke.qq.com/adActivity.html?name=xiangxueketang2" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'T2-享学')">【推荐】55K刚面完Java架构师岗，这些技术你必须掌握</a><br></div>
+<div id="opt_under_post"></div>
+<script async="async" src="Git%20Submodule%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%AD%90%E6%A8%A1%E5%9D%97%20-%20nicksheng%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/gpt.js"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>相关博文：</b><br>·  <a href="https://www.cnblogs.com/kelsen/p/5918672.html" target="_blank" onclick="clickRecomItmem(5918672)">Git 子模块 - submodule</a><br>·  <a href="https://www.cnblogs.com/lsgxeva/p/8540758.html" target="_blank" onclick="clickRecomItmem(8540758)">Git Submodule使用完整教程</a><br>·  <a href="https://www.cnblogs.com/fengmk2/archive/2011/04/11/git-submodule.html" target="_blank" onclick="clickRecomItmem(2012754)">git submodule，解决依赖模块更新</a><br>·  <a href="https://www.cnblogs.com/lv-xing-de-mu-ne/p/7306886.html" target="_blank" onclick="clickRecomItmem(7306886)">使用Git Submodule管理子模块</a><br>·  <a href="https://www.cnblogs.com/fnlingnzb-learner/p/10396283.html" target="_blank" onclick="clickRecomItmem(10396283)">使用GitSubmodule管理子模块</a><br></div></div>
+<div id="cnblogs_c2" class="c_ad_block">
+    <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;"></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block"><b>最新新闻</b>：<br> ·  <a href="https://news.cnblogs.com/n/621915/" target="_blank">现在，我学点正经知识都要上 B 站了</a><br> ·  <a href="https://news.cnblogs.com/n/621920/" target="_blank">北大方正公司回应 微软雅黑不是免费字体</a><br> ·  <a href="https://news.cnblogs.com/n/621919/" target="_blank">315涉事企业回应忙：不是我、 和我无关、致歉并彻查</a><br> ·  <a href="https://news.cnblogs.com/n/621918/" target="_blank">Facebook三号人物离职 小扎转型学微信看来是认真的</a><br> ·  <a href="https://news.cnblogs.com/n/621917/" target="_blank">你知道吗？2018年苹果的AirPods可能卖得特别好</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);  
+}
+</script>
+</div>
+
+    
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/nicksheng/">nicksheng</a><br>园龄：<a href="https://home.cnblogs.com/u/nicksheng/" title="入园时间：2016-11-01">2年4个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/nicksheng/followers/">1</a><br>关注：<a href="https://home.cnblogs.com/u/nicksheng/followees/">0</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow('51ec640c-00a0-e611-845c-ac853d9f53ac')">+加关注</a></div><script>getFollowStatus('51ec640c-00a0-e611-845c-ac853d9f53ac')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" title="Calendar" cellspacing="0" cellpadding="0">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar('2019/02/01');return false;">&lt;</a></td><td align="center">2019年3月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar('2019/04/01');return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" abbr="日" scope="col" align="center">日</th><th class="CalDayHeader" abbr="一" scope="col" align="center">一</th><th class="CalDayHeader" abbr="二" scope="col" align="center">二</th><th class="CalDayHeader" abbr="三" scope="col" align="center">三</th><th class="CalDayHeader" abbr="四" scope="col" align="center">四</th><th class="CalDayHeader" abbr="五" scope="col" align="center">五</th><th class="CalDayHeader" abbr="六" scope="col" align="center">六</th></tr><tr><td class="CalOtherMonthDay" align="center">24</td><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td align="center">1</td><td class="CalWeekendDay" align="center">2</td></tr><tr><td class="CalWeekendDay" align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td class="CalWeekendDay" align="center">9</td></tr><tr><td class="CalWeekendDay" align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td class="CalTodayDay" align="center">16</td></tr><tr><td class="CalWeekendDay" align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td class="CalWeekendDay" align="center">23</td></tr><tr><td class="CalWeekendDay" align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td class="CalWeekendDay" align="center">30</td></tr><tr><td class="CalWeekendDay" align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/nicksheng/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="https://www.cnblogs.com/nicksheng/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="https://www.cnblogs.com/nicksheng/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="https://www.cnblogs.com/nicksheng/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="https://www.cnblogs.com/nicksheng/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/nicksheng/tag/git/">git</a>(1)</li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/nicksheng/category/928795.html">git(1)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/nicksheng/archive/2016/12.html">2016年12月 (1)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/nicksheng/p/6201711.html#4109187">1. Re:Git Submodule管理项目子模块</a></li>
+        <li class="recent_comment_body">小兄弟，你博客写的很好啊，为什么不继续写了</li>
+        <li class="recent_comment_author">--Chris_lzy</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/nicksheng/p/6201711.html#3996845">2. Re:Git Submodule管理项目子模块</a></li>
+        <li class="recent_comment_body">有用。感谢</li>
+        <li class="recent_comment_author">--eleven_yw</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/nicksheng/p/6201711.html#3988410">3. Re:Git Submodule管理项目子模块</a></li>
+        <li class="recent_comment_body">git submodule add @stash.weimob.com/scm/h/jingxuan-operation.git src/routes'src/routes' already exis......</li>
+        <li class="recent_comment_author">--stvten</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/nicksheng/p/6201711.html#3943336">4. Re:Git Submodule管理项目子模块</a></li>
+        <li class="recent_comment_body">有用</li>
+        <li class="recent_comment_author">--eleven_yw</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/nicksheng/p/6201711.html">1. Git Submodule管理项目子模块(62847)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/nicksheng/p/6201711.html">1. Git Submodule管理项目子模块(4)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/nicksheng/p/6201711.html">1. Git Submodule管理项目子模块(4)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2019 nicksheng
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+
+</body></html>
